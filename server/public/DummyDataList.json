@@ -1,0 +1,21 @@
+{
+  "recipilist": [
+    {
+      "id" : "1",
+      "name" : "SampleFood",
+      "picture" : "./img/recipi/samplefood.jpeg",
+      "price" : "200",
+      "link" : "./recipi"
+    }
+  ],
+
+  "foodlsit": [
+    {
+      "id" : "1",
+      "name" : "SampleVegetable",
+      "picture" : "./img/foods/samplevegetable.png",
+      "price" : "108",
+      "link" : "./foods"
+    }
+  ]
+}
