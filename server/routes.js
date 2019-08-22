@@ -19,10 +19,6 @@ configRoutes = function(app, server) {
         next();
     });
 
-    app.get('/', function(request, response) {
-        response.redirect('/index.html');
-    });
-
     app.get('/api/v1/menu/:name', function(request, response) {
         var name = request.params.name;
 
