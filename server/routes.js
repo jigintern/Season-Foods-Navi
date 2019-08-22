@@ -1,6 +1,7 @@
 'use strict';
 
 var url = require('url');
+var menu = require('./menu');
 var configRoutes;
 var urlInfo;
 
@@ -24,6 +25,14 @@ configRoutes = function(app, server) {
 
         // ダミーデータの返却
         response.redirect('/DummyDataList.json');
+    });
+
+    app.get('/api/v1/menu/', function(request, response) {
+        menu.GetCategoryList(
+            function(result){
+                response.send(result);
+            }
+        );
     });
 }
 
