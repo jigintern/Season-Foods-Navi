@@ -14,5 +14,6 @@ client.fetch('https://k52.org/syokuzai/', {}, function (err, $, res, body) {
             season_foods.push(food_object)
         })
     }
-    console.log(season_foods)
+    //console.log(season_foods)
+    console.log(JSON.stringify(season_foods,undefined,1));
 });
