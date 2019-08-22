@@ -2,6 +2,7 @@
 
 var url = require('url');
 var configRoutes;
+var urlInfo;
 
 configRoutes = function(app, server) {
     app.get('/', function(request, response) {
@@ -16,6 +17,17 @@ configRoutes = function(app, server) {
         response.contentType('json');
         response.header('Access-Control-Allow-Origin', '*');
         next();
+    });
+
+    app.get('/', function(request, response) {
+        response.redirect('/index.html');
+    });
+
+    app.get('/api/v1/menu/:name', function(request, response) {
+        var name = request.params.name;
+
+        // ダミーデータの返却
+        response.redirect('/DummyDataList.json');
     });
 }
 
