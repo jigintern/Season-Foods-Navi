@@ -1,42 +1,4 @@
 {
-  "recipiList": [
-    {
-      "id" : "1",
-      "name" : "SampleFood",
-      "picture" : "./img/recipi/SampleFood.jpeg",
-      "price" : "200",
-      "area" : "all"
-    },
-    {
-      "id" : "2",
-      "name" : "焼き鯖サンド",
-      "picture" : "https://tabihow.jp/imgtrip/trip118s2.jpg",
-      "price" : "Null",
-      "area" : "福井"
-    },
-    {
-      "id" : "3",
-      "name" : "若狭たかはま鮨",
-      "picture" : "https://tabihow.jp/imgtrip/trip118u1.jpg",
-      "price" : "900",
-      "area" : "福井"
-    },
-    {
-      "id" : "4",
-      "name" : "とんちゃん",
-      "picture" : "https://tabihow.jp/imgtrip/trip118d2.jpg",
-      "price" : "400",
-      "area" : "福井"
-    },
-    {
-      "id" : "null",
-      "name" : "null",
-      "picture" : "./img/recipi/.jpeg",
-      "price" : "800",
-      "area" : "福井"
-    }
-  ],
-
   "foodList": [
     {
       "id" : "1",
