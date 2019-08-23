@@ -14,8 +14,7 @@ function GetCategoryList(callback)
 			qs: {
 				applicationId: process.env.APPLICATION_ID,
 				format: "json",
-				elements: "ALL",
-				formatVersion: 1,
+				formatVersion: "2",
 			},
 			json: true
 		}, (err, req, res) => {
