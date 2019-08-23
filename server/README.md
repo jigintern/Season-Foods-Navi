@@ -19,7 +19,7 @@
 
 ```
 git clone git@github.com:jigintern/Season-Foods-Navi.git
-cd Season-Foods-Navi
+cd Season-Foods-Navi/server
 
 docker-compose build
 docker-compose up
