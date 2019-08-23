@@ -20,15 +20,25 @@ configRoutes = function(app, server) {
         next();
     });
 
-    app.get('/api/v1/menu/:name', function(request, response) {
+    app.get('/api/v1/menu/', function(request, response) {
         var name = request.params.name;
 
         // ダミーデータの返却
         response.redirect('/DummyDataList.json');
     });
 
-    app.get('/api/v1/menu/', function(request, response) {
+    app.get('/api/v1/menu/category_list/', function(request, response) {
         menu.GetCategoryList(
+            function(result){
+                response.send(result);
+            }
+        );
+    });
+
+    app.get('/api/v1/menu/ranking/:id', function(request, response) {
+        var id = request.params.id;
+
+        menu.GetRecipeRanking(id,
             function(result){
                 response.send(result);
             }
