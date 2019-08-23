@@ -21,10 +21,10 @@ configRoutes = function(app, server) {
     });
 
     app.get('/api/v1/menu/', function(request, response) {
-        var name = request.params.name;
+        const data = require('./public/DummyDataList.json');
 
         // ダミーデータの返却
-        response.redirect('/DummyDataList.json');
+        response.send(data);
     });
 
     app.get('/api/v1/menu/category_list/', function(request, response) {
