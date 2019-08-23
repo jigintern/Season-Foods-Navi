@@ -1,12 +1,16 @@
 version: '3'
 services:
   app:
-    build:
-      context: .
+    image: "node:10.16.3"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
     ports:
       - "3000:3000"
-    volumes:
-      - .:/usr/local/Season_Foods_Navi
+    command: "npm start"
     links:
       - mariadb
 
