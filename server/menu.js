@@ -32,6 +32,35 @@ function GetCategoryList(callback)
 	});
 }
 
+function GetRecipeRanking(id, callback)
+{
+	const resipe_ranking =  new Promise((resolve, reject) => {
+		request.get({
+			url: RECIPE_RANKING_URL,
+			headers: {'Content-type': 'application/json'},
+			qs: {
+				applicationId: process.env.APPLICATION_ID,
+				format: "json",
+				formatVersion: "2",
+				categoryId: id,
+			},
+			json: true
+		}, (err, req, res) => {
+			if (err) {
+				reject(err)
+			} else {
+				callback(res)
+				resolve('success : GetRecipeRanking()')
+			}
+		})
+	});
+
+	resipe_ranking.then((res) => {
+		console.log(res);
+	});
+}
+
 module.exports = {
-    GetCategoryList: GetCategoryList
+	GetCategoryList: GetCategoryList,
+	GetRecipeRanking: GetRecipeRanking,
 }
