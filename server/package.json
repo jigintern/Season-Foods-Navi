@@ -1,0 +1,28 @@
+{
+  "name": "season_foods_navi_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jigintern/Season-Foods-Navi.git"
+  },
+  "author": "jigintern2019_TeamC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jigintern/Season-Foods-Navi/issues"
+  },
+  "homepage": "https://github.com/jigintern/Season-Foods-Navi#readme",
+  "dependencies": {
+    "cheerio-httpcli": "^0.7.4",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
