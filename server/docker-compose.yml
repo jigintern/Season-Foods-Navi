@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/local/Season_Foods_Navi
+    links:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.4
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: SeasonFoodsNavi
+      MYSQL_PASSWORD: SeasonFoodsNavi
+      MYSQL_ROOT_PASSWORD: SeasonFoodsNavi
+    volumes:
+      - SeasonFoodsNavi-mariadb:/var/lib/mysql
+
+volumes:
+  SeasonFoodsNavi-mariadb: {}
