@@ -26,3 +26,8 @@ docker-compose up
 ```
 
 http://localhost:3000/ が表示されれば、動作しています。
+
+## コンテナログイン方法
+```bash
+$ docker exec -it server_app_1 bash
+```
