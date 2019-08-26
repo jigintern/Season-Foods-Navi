@@ -32,3 +32,8 @@ http://localhost:3000/ が表示されれば、動作しています。
 $ docker exec -it server_app_1 bash
 $ docker exec -it server_mariadb_1 bash
 ```
+## mariadbログイン方法
+```bash
+$ mysql -u SeasonFoodsNavi -p
+$ password: SeasonFoodsNavi
+```
