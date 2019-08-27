@@ -5,6 +5,23 @@ const request = require('request');
 const RECIPE_CATEGORY_URL = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426";
 const RECIPE_RANKING_URL = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426";
 
+// reference: https://laboradian.com/js-wait/
+const wait = (sec) => {
+	return new Promise((resolve, reject) => {
+	  setTimeout(resolve, sec*1000);
+	});
+};
+
+// reference: https://github.com/30-seconds/30-seconds-of-code#shuffle
+const shuffle = ([...arr]) => {
+	let m = arr.length;
+	while (m) {
+		const i = Math.floor(Math.random() * m--);
+		[arr[m], arr[i]] = [arr[i], arr[m]];
+	}
+	return arr;
+};
+
 function GetRecipe()
 {
 	/*
@@ -17,43 +34,69 @@ function GetRecipe()
 	const month = date.getMonth()+1;
 	let categories = [];
 	let food_name = [];
+	let match_categories = [];
+	let result = [];
+	let res_JSON = {};
 
-	const get_categories = function() {
-		categories = GetCategoryList();
-	}
-
-	const extraction_search = function() {	
-		// 旬の食材名を抽出
-		season_foods.seasonFoods.map((season_food) => {
-			const index = season_food.season.findIndex(item => item === String(month));
-			if (index !== -1) {
-				food_name.push(season_food.name);
+	const response = new Promise((resolve, reject) => {
+		const get_categories = async function() {
+			categories = await GetCategoryList();
+		}
+	
+		const extraction_search = function() {
+			// 旬の食材名を抽出
+			season_foods.seasonFoods.map((season_food) => {
+				const index = season_food.season.findIndex(item => item === String(month));
+				if (index !== -1) {
+					food_name.push(season_food.name);
+				}
+			});
+	
+			// 旬の食材と合致するカテゴリを抽出
+			food_name.map((name) => {
+				for (const category_type in categories.result) {
+					const match_category = categories.result[category_type].filter(function(item, index){
+						if ((item.categoryName).indexOf(name) >= 0) return true;
+					});
+					if (match_category.length > 0)
+						match_categories.push(match_category)
+				}
+			});
+		}
+	
+		const get_recipe_ranking = async function() {
+			//特定のカテゴリのランキングを取得して出力
+			for (const match_category in match_categories) {
+				for (const single in match_categories[match_category]) {
+					try {
+						await wait(1); // API制限の回避
+	
+						const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
+						const recipes = await GetRecipeRanking(category_id);
+						for (const recipe in recipes.result) {
+							result.push(recipes.result[recipe]);
+						}
+					} catch (err) {
+						console.error(err);
+					}
+				}
 			}
-		});
+			const result_shuffle = shuffle(result) // 同じ食材を使ったレシピが集まるのを回避
+			res_JSON = JSON.stringify({result: result_shuffle})
+			// res_JSON[result.all] = result.length;
+		}
+	
+		const processAll = async function() {
+			await get_categories()
+			await extraction_search()
+			await get_recipe_ranking()
+			resolve(res_JSON)
+		}
 
-		// 旬の食材と合致するカテゴリを抽出
-		// food_name.map((name) => {
-		// 	const match_category = Object.keys(categories).foreach((category_type) => {
-		// 		category_type.filter(function(item, index){
-		// 			if ((item.categoryName).indexOf(name) >= 0) return true;
-		// 		});
-		// 	});
+		processAll()
+	});
 
-		// 	console.log(match_category);
-		// });
-	}
-
-	const get_recipe_ranking = function() {
-		//特定のカテゴリのランキングを取得して出力
-	}
-
-	const processAll = async function() {
-		await get_categories()
-		await extraction_search()
-		await get_recipe_ranking()
-	}
-
-	processAll()
+	return response
 }
 
 async function GetCategoryList()
