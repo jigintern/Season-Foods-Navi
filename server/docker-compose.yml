@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    image: "node:10.16.3"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "3000:3000"
+    command: "npm start"
+    links:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.4
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: SeasonFoodsNavi
+      MYSQL_PASSWORD: SeasonFoodsNavi
+      MYSQL_ROOT_PASSWORD: SeasonFoodsNavi
+    volumes:
+      - SeasonFoodsNavi-mariadb:/var/lib/mysql
+
+volumes:
+  SeasonFoodsNavi-mariadb: {}

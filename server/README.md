@@ -8,9 +8,32 @@
 * Express
 
 ## 実行方法
-リポジトリを取得したら、`server`ディレクトリに移動し、以下のコマンドを実行してください。
+事前に以下のコマンドをインストールしてください。
+
+* Git
+* Docker
+* docker-compose
+
+その後、以下の操作により、実行できます。  
+`docker-compose`実行時にエラーが表示される場合は、`sudo`をつけての実行を試してください。
+
 ```
-npm install
-npm start
+git clone git@github.com:jigintern/Season-Foods-Navi.git
+cd Season-Foods-Navi/server
+
+docker-compose build
+docker-compose up
 ```
+
 http://localhost:3000/ が表示されれば、動作しています。
+
+## コンテナログイン方法
+```bash
+$ docker exec -it server_app_1 bash
+$ docker exec -it server_mariadb_1 bash
+```
+## mariadbログイン方法
+```bash
+$ mysql -u SeasonFoodsNavi -p
+$ password: SeasonFoodsNavi
+```
