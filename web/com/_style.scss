@@ -1,0 +1,12 @@
+.mc {
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 500px;
+    display: flex;
+    > div {
+        width: 50%;
+        > form {
+            padding: .5em 1em;
+        }
+    }
+}
