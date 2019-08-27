@@ -1,0 +1,95 @@
+{
+  "foodList": [
+    {
+      "id" : "1",
+      "name" : "越前とまと",
+      "picture" : "./img/foods/SampleVegetable.png",
+      "price" : "100",
+      "area" : "Null"
+    },
+    {
+      "id" : "2",
+      "name" : "越前キュウリ",
+      "picture" : "./img/foods/EchizenCucumber.png",
+      "price" : "30",
+      "area" : "福井"
+    },
+    {
+      "id" : "3",
+      "name" : "コカブ",
+      "picture" : "./img/foods/KoTurnip.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "4",
+      "name" : "越のルピー",
+      "picture" : "https://ja-kineya.com/wp/wp-content/themes/ja-kineya/img/page/img-tyokubai_01.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "5",
+      "name" : "越前こまつな",
+      "picture" : "https://ja-kineya.com/wp/wp-content/themes/ja-kineya/img/page/img-tyokubai_06.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "6",
+      "name" : "越前ほうれんそう",
+      "picture" : "https://ja-kineya.com/wp/wp-content/themes/ja-kineya/img/page/img-tyokubai_07.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "7",
+      "name" : "越前水菜",
+      "picture" : "https://ja-kineya.com/wp/wp-content/themes/ja-kineya/img/page/img-tyokubai_08.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "8",
+      "name" : "越前金時",
+      "picture" : "https://ja-kineya.com/wp/wp-content/themes/ja-kineya/img/page/img-tyokubai_12.png",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "9",
+      "name" : "吉川ナス",
+      "picture" : "https://www.city.sabae.fukui.jp/oishii/oishii_nakama/oishi-yoshikawanasu.images/yoshikawanasu-01.jpg",
+      "price" : "50",
+      "area" : "福井"
+    },
+    {
+      "id" : "10",
+      "name" : "谷田部ねぎ",
+      "picture" : "http://fukuinavi.jp/wp-content/uploads/2012/02/a11b4bb3ba448d1fa402ac3dc62cc91f35.jpg",
+      "price" : "40",
+      "area" : "福井"
+    },
+    {
+      "id" : "11",
+      "name" : "河内赤かぶら",
+      "picture" : "https://www.city.fukui.lg.jp/photo/omiyage/nousanbutu/p014145_d/img/001.jpg",
+      "price" : "100",
+      "area" : "福井"
+    },
+    {
+      "id" : "11",
+      "name" : "越前白茎ごぼう",
+      "picture" : "http://www.yasaidate.com/wp-content/uploads/2016/03/t02130320_0213032010544002518.jpg",
+      "price" : "",
+      "area" : "福井"
+    },
+    {
+      "id" : "",
+      "name" : "null",
+      "picture" : "null",
+      "price" : "null",
+      "area" : "null"
+    }
+  ]
+}
