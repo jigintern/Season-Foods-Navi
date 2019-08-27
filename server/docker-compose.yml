@@ -10,7 +10,7 @@ services:
       - ./:/home/node/app
     ports:
       - "3000:3000"
-    command: "npm start"
+    command: bash -c "npm install && npm start"
     links:
       - mariadb
 
