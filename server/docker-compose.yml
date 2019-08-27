@@ -10,7 +10,7 @@ services:
       - ./:/home/node/app
     ports:
       - "3000:3000"
-    command: "npm start"
+    command: bash -c "npm install && npm start"
     links:
       - mariadb
 
@@ -25,6 +25,7 @@ services:
       MYSQL_ROOT_PASSWORD: SeasonFoodsNavi
     volumes:
       - SeasonFoodsNavi-mariadb:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
 
 volumes:
   SeasonFoodsNavi-mariadb: {}
