@@ -4,9 +4,9 @@ const http = require('http');
 
 var REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation"
 
-var x = 136.180764, y = 35.966679; 
+//var x = 136.180764, y = 35.966679; 
 //console.log(JSON.parse(GetPrefecture(x,y)).response.location[0].prefecture);
-GetPrefecture(y,x);
+//GetPrefecture(x,y);
 
 function GetPrefecture(longitude,latitude){
     REQUEST_PREFECTURE_URL += '&x=' + longitude + '&y=' + latitude;
