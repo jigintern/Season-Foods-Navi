@@ -1,4 +1,4 @@
-INSERT INTO IF NOT EXISTS season_foods_navi.prefecture (id, name) VALUES
+INSERT INTO season_foods_navi.prefecture (id, name) VALUES
 (0, '北海道'),
 (1, '青森県'),
 (2, '岩手県'),
