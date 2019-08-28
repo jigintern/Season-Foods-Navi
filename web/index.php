@@ -20,7 +20,7 @@
         <div class="mc">
             <div class="syokuzai">
                 <h3>ローカル食材</h3>
-                <form action="./form.php" method="post" name="syokuzai">
+                <form action="./form.php" method="post" name="syokuzai" enctype="multipart/form-data">
                     <div>
                         <div class="input-field">
                             <input placeholder="トマト" id="name" type="text" class="validate" name="name">
@@ -49,7 +49,7 @@
             </div>
             <div class="kondate">
                 <h3>献立</h3>
-                <form action="./form.php" method="post" name="kondate">
+                <form action="./form.php" method="post" name="kondate" enctype="multipart/form-data">
                         <div class="input-field">
                             <input placeholder="jigカレー" id="name" type="text" class="validate" name="name">
                             <label for="name">献立名</label>
@@ -81,6 +81,7 @@
             </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./index.js"></script>
 </body>
