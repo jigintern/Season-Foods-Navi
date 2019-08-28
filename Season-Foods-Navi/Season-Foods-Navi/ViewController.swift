@@ -77,26 +77,33 @@ let myjson = """
     ]
 }
 """
-var isfirstload = true
 var menujson:JSON!
 var results:[Result]=[]
 var locationmaneger:CLLocationManager!
 var rakutenResults:[rakutenResult]=[]
+var tapped_path:Int!
 class ViewController: UIViewController,UICollectionViewDelegateFlowLayout,CLLocationManagerDelegate{
 
     // let CELLID = "menu"
-    
+    var statusBarHidden = true
     @IBOutlet var menucollection: UICollectionView!
     let SERVER:String! = "http://localhost:3000/public"
     var datas:recipilist?
     //var food_datas:foodlsit?
    // var users:Users?
     var menutable:UITableView!
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNeedsStatusBarAppearanceUpdate()
+        setNeedsStatusBarAppearanceUpdate()
+        self.navigationController?.setToolbarHidden(true, animated: false)
         self.menucollection.delegate = self
         self.menucollection.dataSource = self
-      /*  Alamofire.request(SERVER,method: .get).responseString{response in
+        Alamofire.request(SERVER,method: .get).responseString{response in
             switch response.result{
             case .success:
                /* print("result",response)
@@ -118,7 +125,7 @@ class ViewController: UIViewController,UICollectionViewDelegateFlowLayout,CLLoca
                 print(ERROR)
                 break
             }
-          }*/
+          }
         
             if let data = myjson.data(using:.utf8){
                 let decoder:JSONDecoder = JSONDecoder()
@@ -155,8 +162,22 @@ class ViewController: UIViewController,UICollectionViewDelegateFlowLayout,CLLoca
     
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row)番目の画像が選択されました。")
-        print(results[0].recipilist[indexPath.row].name)
+       // print("\(indexPath.row)番目の画像が選択されました。")
+       // print(results[0].recipilist[indexPath.row].name)
+        tapped_path = indexPath.row
+        let nextvc = RecipeViewController()
+        let next = self.storyboard!.instantiateViewController(withIdentifier: "recipeview") as? RecipeViewController
+        next?.recipename = results[0].recipilist[indexPath.row].name
+        nextvc.view.backgroundColor = UIColor.blue
+        performSegue(withIdentifier: "toRecipe", sender: nil)
+       // self.navigationController?.pushViewController(nextvc, animated: true)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRecipe" {
+           // let nc = segue.destination as! UINavigationController
+            let nextView = segue.destination as! RecipeViewController
+            nextView.recipename = results[0].recipilist[tapped_path].name
+        }
     }
     func Setuplocationmanager(){
         locationmaneger = CLLocationManager()
@@ -181,7 +202,7 @@ class ViewController: UIViewController,UICollectionViewDelegateFlowLayout,CLLoca
             let encoder:JSONEncoder = JSONEncoder()
             let urlstring = "http://localhost:3000/api/v1/menu"
           //  let parameter = try? encoder.encode(locate)
-         //   Alamofire.request(urlstring,method: .post,parameters: locate)
+            Alamofire.request(urlstring,method: .get,parameters: locate)
          /*   Alamofire.request(SERVER, method: .post, parameters:locate, encoding:JSONEncoding.default , headers: [
                 "Contenttype": "application/json"
                 ]).responseJSON{ response in
@@ -228,11 +249,10 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource {
         print(imageurl)
         cell.imageview.sd_setImage(with: URL(string:imageurl), placeholderImage:UIImage(named:"loading.png"))
         
-        if imagepath == "./img/recipi/.jpeg" {
+        if indexPath.row == 4 {
             cell.imageview.image = UIImage(named: "dust.png")
         }
         self.view.addSubview(cell.imageview)
-       // isfirstload = false
         return cell
     }
 }
@@ -276,6 +296,9 @@ extension ViewController{
                 break
             }
         }
+    }
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
 class MyCustomCell:UICollectionViewCell{

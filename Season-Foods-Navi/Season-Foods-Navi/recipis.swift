@@ -58,3 +58,9 @@ struct rakuten:Codable{
     let recipePublishday:String
     let rank:Int
 }
+struct foodinfo:Codable{
+    let monthly_cost:[Int]
+    let eiyou:[String]
+    let syun:[Int]
+    let name:String
+}

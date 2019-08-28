@@ -6,7 +6,8 @@ target 'Season-Foods-Navi' do
   use_frameworks!
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'SDWebImage' 
+  pod 'SDWebImage'
+  pod 'Charts' 
 
 #  target 'Season-Foods-NaviTests' do
 #    inherit! :/Users/dry/desktop/workspace/Season-Foods-Navi

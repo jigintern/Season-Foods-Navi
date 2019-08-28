@@ -17,6 +17,8 @@
 		412854E9230E245D0084E699 /* Season_Foods_NaviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854E8230E245D0084E699 /* Season_Foods_NaviUITests.swift */; };
 		41285506230E2BB50084E699 /* Menucell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41285505230E2BB50084E699 /* Menucell.swift */; };
 		418347B02313B20500ACDECD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418347AF2313B20500ACDECD /* CoreLocation.framework */; };
+		418347B22315048B00ACDECD /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418347B12315048B00ACDECD /* RecipeViewController.swift */; };
+		418347B4231519C100ACDECD /* FoodInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418347B3231519C100ACDECD /* FoodInfoViewController.swift */; };
 		4F880DE00DB856E5366D8B39 /* Pods_Season_Foods_Navi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3185F54A6F7D766900C31 /* Pods_Season_Foods_Navi.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		412854EA230E245D0084E699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41285505230E2BB50084E699 /* Menucell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menucell.swift; sourceTree = "<group>"; };
 		418347AF2313B20500ACDECD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		418347B12315048B00ACDECD /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		418347B3231519C100ACDECD /* FoodInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoViewController.swift; sourceTree = "<group>"; };
 		71B3185F54A6F7D766900C31 /* Pods_Season_Foods_Navi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Season_Foods_Navi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7256E3F098A90E754610E704 /* Pods-Season-Foods-Navi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Season-Foods-Navi.release.xcconfig"; path = "Target Support Files/Pods-Season-Foods-Navi/Pods-Season-Foods-Navi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +126,8 @@
 			children = (
 				412854C8230E245B0084E699 /* AppDelegate.swift */,
 				412854CA230E245B0084E699 /* ViewController.swift */,
+				418347B12315048B00ACDECD /* RecipeViewController.swift */,
+				418347B3231519C100ACDECD /* FoodInfoViewController.swift */,
 				411BA39B230E7C22001CB034 /* recipis.swift */,
 				41285505230E2BB50084E699 /* Menucell.swift */,
 				412854CC230E245B0084E699 /* Main.storyboard */,
@@ -336,8 +342,10 @@
 			files = (
 				41285506230E2BB50084E699 /* Menucell.swift in Sources */,
 				412854C9230E245B0084E699 /* AppDelegate.swift in Sources */,
+				418347B4231519C100ACDECD /* FoodInfoViewController.swift in Sources */,
 				411BA39F230F73C7001CB034 /* ViewController.swift in Sources */,
 				411BA39C230E7C22001CB034 /* recipis.swift in Sources */,
+				418347B22315048B00ACDECD /* RecipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
