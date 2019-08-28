@@ -8,8 +8,7 @@ CREATE TABLE IF NOT EXISTS season_foods_navi.foods (
   `post` TINYINT(1) DEFAULT 1,
 
   PRIMARY KEY (`id`),
-  KEY `pref_id` (`pref_id`),
-  CONSTRAINT `foods_ibfk_1` FOREIGN KEY (`pref_id`) REFERENCES `prefecture` (`id`)
+  FOREIGN KEY (`pref_id`) REFERENCES `prefecture` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS season_foods_navi.recipes (
@@ -22,8 +21,7 @@ CREATE TABLE IF NOT EXISTS season_foods_navi.recipes (
   `post` TINYINT(1) DEFAULT 1,
 
   PRIMARY KEY (`id`),
-  KEY `pref_id` (`pref_id`),
-  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`pref_id`) REFERENCES `prefecture` (`id`)
+  FOREIGN KEY (`pref_id`) REFERENCES `prefecture` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS season_foods_navi.prefecture (
