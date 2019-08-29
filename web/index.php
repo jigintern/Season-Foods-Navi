@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <Meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>旬食ナビ 投稿</title>
-    <link rel="stylesheet" href="./com/import.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="./com/import.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    <header>
-        <nav>
+<header>
+    <nav>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo center">旬食ナビ</a>
-            </div>
-        </nav>
+        </div>
+    </nav>
     </header>
     <main>
         <div class="mc">
@@ -44,6 +44,69 @@
                         </select>
                         <label for="prefecture_1">地域名</label>
                     </div>
+                    <div class="input-field">
+                        <select name="base_food" id="base_food">
+                        </select>
+                        <label for="base_food">もとの食材</label>
+                    </div>
+                    <div class="input-field">
+                        <h6>旬の選択</h6>
+                        <style>
+                            .month_checkbox {
+                                margin-right: 1em;
+                            }
+                        </style>
+                        <p>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="1" name="month[]"/>
+                                <span>1月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="2"name="month[]"/>
+                                <span>2月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="3"name="month[]"/>
+                                <span>3月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="4"name="month[]"/>
+                                <span>4月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="5"name="month[]"/>
+                                <span>5月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="6"name="month[]"/>
+                                <span>6月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="7"name="month[]"/>
+                                <span>7月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="8"name="month[]"/>
+                                <span>8月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="9"name="month[]"/>
+                                <span>9月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="10"name="month[]"/>
+                                <span>10月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="11"name="month[]"/>
+                                <span>11月</span>
+                            </label>
+                            <label class="month_checkbox">
+                                <input type="checkbox" value="12"name="month[]"/>
+                                <span>12月</span>
+                            </label>
+                        </p>
+                    </div>
                     <button class="btn" name="submit_1">送信</button>
                 </form>
             </div>
@@ -71,11 +134,15 @@
                         </select>
                         <label for="prefecture_2">地域名</label>
                     </div>
-                    <label for="">使用する食材</label>
-                    <p>
-                    jig課題のときと同じ検索方法
-                    データベースから食材一覧をとってきてjs配列に持たせてfilterで正規表現を使いながら検索する
-                    </p>
+                    <div class="input-field">
+                        <select name="foods[]" id="foods" multiple>
+                        </select>
+                        <label for="foods">食材名</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea" name="howto"></textarea>
+                        <label for="textarea1">作り方</label>
+                    </div>
                     <button class="btn" name="submit_2">送信</button>
                 </form>
             </div>
