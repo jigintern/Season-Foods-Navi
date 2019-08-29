@@ -15,7 +15,7 @@ class DB{
 			exit;
 		}
     }
-    // ユーザーからの入力を利用する
+    // ユーザーからの入力を利用する excuteが必要になる
 	function prepare($statement){
 		return $this->dbh->prepare($statement);
     }
