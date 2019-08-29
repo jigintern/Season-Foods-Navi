@@ -21,7 +21,7 @@ configRoutes = function(app, server) {
     });
 
     app.get('/api/v1/menu/', async function(request, response) {
-        const result = await menu.GetRecipe();
+        const result = await menu.GetRecipe(urlInfo);
         response.send(result);
 
         // ダミーデータの返却
