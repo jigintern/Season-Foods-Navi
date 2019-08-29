@@ -1,30 +1,49 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const httpClient = require('cheerio-httpcli');
-const _ = require('lodash');
-const moment = require('moment');
 
-async function main() {
-    const GET_URL = 'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=12_12004_7';
-          // HTMLデータを取得
-        const result = await httpClient.fetch(GET_URL);
+async function GetFoodsNutrientJSON(url){
+    const GET_URL = url //'https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=12_12004_7';
+    // HTMLデータを取得
+    const result = await httpClient.fetch(GET_URL);
+    //console.log(GET_URL);
+    
+    const $ = result.$;
+    const logList = [];
+    const OO = {};
+    let Title = "";
+    const GetNameList = ["エネルギー","たんぱく質","脂質","炭水化物",
+                "ナトリウム","カリウム","カルシウム","マグネシウム","コレステロール","食塩相当量"];
+        //const GetName = food;
+        // HTML内の表の行データを取得して変換してリストに入れる
+    /**
+     * 
+        */
+    Title = $('span.foodfullname').text();
+        //Title = $(this).find(".foodfullname").text();
+        //console.log(Title)
+    //});
 
-        const $ = result.$;
-        const logList = [];
 
-
-            // HTML内の表の行データを取得して変換してリストに入れる
-        $('tr', '#nut').filter(function () { return $(this).attr('class') != 'pr_tit'; }).each(function () {
-            const nObject = {};
-            nObject["name"] = $(this).find(".no_under").text();
+    $('tr', '#nut').filter(function () { return $(this).attr('class') != 'pr_tit'; }).each(function () {
+        const nObject = {};
+        const Name = $(this).find(".no_under").text();
+        if(GetNameList.indexOf(Name) >= 0){
+        //if(GetName == 0){
+            nObject["name"] = Name;
             nObject["value"] = $(this).find(".num").text();
             nObject["unit"] = $(this).find(".pr_unit").text();
             logList.push(nObject);
-        });
-        console.log(JSON.stringify(logList,undefined,1));
-        
+        } 
+    });
+    OO["food"] = Title; 
+    OO["info"] = logList;
 
+    //console.log(JSON.stringify(logList,undefined,1)); 
+    //return JSON.stringify(logList,undefined,1) 
+    return OO;
 }
-
-main();
-
+    
+module.exports = {
+    GetFoodsNutrientJSON: GetFoodsNutrientJSON
+}
