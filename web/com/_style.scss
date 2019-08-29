@@ -3,9 +3,11 @@
     margin: 0 auto;
     min-height: 500px;
     display: flex;
-    > div {
+
+    >div {
         width: 50%;
-        > form {
+
+        >form {
             padding: .5em 1em;
         }
     }
