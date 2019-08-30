@@ -1,7 +1,7 @@
 <?php
 require_once('./class.php');
 $db = new DB;
-$sql = 'SELECT id, name FROM local_foods';
+$sql = 'SELECT id, name FROM foods';
 $local_foods = $db -> query($sql);
 $local_foods_json = array();
 foreach($local_foods as $row) {
