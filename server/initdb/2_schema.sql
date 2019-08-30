@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS season_foods_navi.prefecture (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS season_foods_navi.foods (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `base_food` INT(11) DEFAULT NULL,
   `picture` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
