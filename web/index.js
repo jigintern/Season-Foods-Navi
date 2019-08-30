@@ -10,14 +10,27 @@ $(function () {
         url: './getPrefecture.php',
         dataType: 'json',
     }).done(data => {
+        console.log('success');
+        console.log(data);
         createOptions(data);
-    })
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        // エラーの場合処理
+        console.log("エラーが発生しました。ステータス：" + jqXHR.status);
+        console.log(textStatus);
+        console.log(errorThrown);
+    });
     $.ajax({
         type: 'get',
         url: './getFoods.php',
         dataType: 'json',
     }).done(data => {
+        console.log('success');
+        console.log(data)
         createFoodsOption(data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("エラーが発生しました。ステータス：" + jqXHR.status);
+        console.log(textStatus);
+        console.log(errorThrown);
     })
 })
 const createOptions = (data) => {
