@@ -38,6 +38,18 @@
 |longitude|数値||〇|| 言葉の通り経度 |
 |latitude|数値||〇|| 言葉の通り緯度 |
 
+### 楽天レシピAPI 対応，使用するデータ
+| 元の値 | 変換後 | 備考 |
+|---|---|---|
+| result | recipeList | |
+| - recipeTitle | -name | |
+| - mediumImageUrl | - picture | |
+| - recipeDescription| - recipeDescription | |
+| - recipeMaterial | - foods | 配列 |
+| - recipeCost | - cost | 文字列をそのまま |
+| - recipeIndication | - time | 調理時間 |
+
+
 <br>
 
 |出力データ| | | | | | 
@@ -51,7 +63,8 @@
 | - prefecture | 文字列 | | | | 主にどこの県の料理か |
 | - foods | 配列 | | | | 使われている食材の一覧 |
 | -- food | 文字列 | | | | 食材の名前 |
-| - price | 数値 | | | | 予算の目安 |
+| - cost | 数値 | | | | 予算の目安 |
+| - time | 文字列 | | | | 調理時間の目安 |
 
 |ステータスコード|説明|
 |---|---|
