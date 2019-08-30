@@ -2,7 +2,7 @@
 class DB{
 	private $dbh;
 	function __construct(){
-		$DB_HOST = 'localhost:3306';
+		$DB_HOST = 'mariadb:3306';
 		$DB_USER = 'SeasonFoodsNavi';
 		$DB_PASSWORD = 'SeasonFoodsNavi';
 		$DB_NAME = 'season_foods_navi';
@@ -11,7 +11,7 @@ class DB{
 			$dsn = "mysql:dbname={$DB_NAME};host={$DB_HOST};charset=utf8";
             $this->dbh = new PDO($dsn,$DB_USER,$DB_PASSWORD);
 		}catch(PDOException $e){
-			echo 'Database Connection failed:'.$e->getMessage();
+			echo 'Database Connection failed:'.'  '.$e->getMessage();
 			exit;
 		}
     }

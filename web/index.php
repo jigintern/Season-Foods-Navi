@@ -11,8 +11,8 @@
 <body>
 <header>
     <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">旬食ナビ</a>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">旬食ナビ</a>
         </div>
     </nav>
     </header>
