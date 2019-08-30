@@ -8,7 +8,7 @@ class DB{
 		$DB_NAME = 'season_foods_navi';
 		
 		try{
-			$dsn = "mysql:dbname={$DB_NAME};host={$DB_HOST};charset=utf8";
+			$dsn = "mysql:dbname={$DB_NAME};host={$DB_HOST};charset=utf8;";
             $this->dbh = new PDO($dsn,$DB_USER,$DB_PASSWORD);
 		}catch(PDOException $e){
 			echo 'Database Connection failed:'.'  '.$e->getMessage();

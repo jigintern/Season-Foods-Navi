@@ -9,6 +9,7 @@ $(function () {
         type: 'get',
         url: './getPrefecture.php',
         dataType: 'json',
+        scriptCharset: 'UTF-8',
     }).done(data => {
         console.log('success');
         console.log(data);
@@ -23,6 +24,7 @@ $(function () {
         type: 'get',
         url: './getFoods.php',
         dataType: 'json',
+        scriptCharset: 'UTF-8',
     }).done(data => {
         console.log('success');
         console.log(data)
