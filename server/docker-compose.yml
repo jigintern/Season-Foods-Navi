@@ -1,13 +1,14 @@
 version: '3'
 services:
   app:
-    image: node:10.16.3
+    image: "node:10.16.3"
     user: "node"
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
     volumes:
       - ./:/home/node/app
+      - ../images:/var/www/images
     ports:
       - "3000:3000"
     command: bash -c "npm install && npm start"
@@ -15,6 +16,7 @@ services:
       - mariadb
 
   mariadb:
+    container_name: mariadb
     image: mariadb:10.4
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
@@ -26,6 +28,25 @@ services:
     volumes:
       - SeasonFoodsNavi-mariadb:/var/lib/mysql
       - ./initdb:/docker-entrypoint-initdb.d
+
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - ../web:/var/www/html
+      - ../images:/var/www/images
+    depends_on:
+      - php
+
+  php:
+    build: ./
+    volumes: 
+      - ../web:/var/www/html
+      - ../images:/var/www/images
+    depends_on:
+      - mariadb
 
 volumes:
   SeasonFoodsNavi-mariadb: {}
