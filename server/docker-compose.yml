@@ -16,7 +16,7 @@ services:
 
   mariadb:
     image: mariadb:10.4
-    command: mysqld --character-set-server=utf8 --character_set_client=utf8 --character_set_results=utf8 --character_set_connection=utf8 --collation-server=utf8_unicode_ci
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
       - "3306:3306"
     environment:
@@ -26,6 +26,7 @@ services:
     volumes:
       - SeasonFoodsNavi-mariadb:/var/lib/mysql
       - ./initdb:/docker-entrypoint-initdb.d
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
 
 volumes:
   SeasonFoodsNavi-mariadb: {}
