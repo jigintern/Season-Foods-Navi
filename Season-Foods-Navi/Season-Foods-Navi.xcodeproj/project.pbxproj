@@ -11,7 +11,6 @@
 		411BA39F230F73C7001CB034 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854CA230E245B0084E699 /* ViewController.swift */; };
 		412854C9230E245B0084E699 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854C8230E245B0084E699 /* AppDelegate.swift */; };
 		412854CE230E245B0084E699 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412854CC230E245B0084E699 /* Main.storyboard */; };
-		412854D0230E245D0084E699 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412854CF230E245D0084E699 /* Assets.xcassets */; };
 		412854D3230E245D0084E699 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412854D1230E245D0084E699 /* LaunchScreen.storyboard */; };
 		412854DE230E245D0084E699 /* Season_Foods_NaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854DD230E245D0084E699 /* Season_Foods_NaviTests.swift */; };
 		412854E9230E245D0084E699 /* Season_Foods_NaviUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854E8230E245D0084E699 /* Season_Foods_NaviUITests.swift */; };
@@ -19,6 +18,7 @@
 		418347B02313B20500ACDECD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418347AF2313B20500ACDECD /* CoreLocation.framework */; };
 		418347B22315048B00ACDECD /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418347B12315048B00ACDECD /* RecipeViewController.swift */; };
 		418347B4231519C100ACDECD /* FoodInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418347B3231519C100ACDECD /* FoodInfoViewController.swift */; };
+		418EBAC92318F3E2006EA0CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 418EBAC82318F3E2006EA0CA /* Images.xcassets */; };
 		4F880DE00DB856E5366D8B39 /* Pods_Season_Foods_Navi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B3185F54A6F7D766900C31 /* Pods_Season_Foods_Navi.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,6 @@
 		412854C8230E245B0084E699 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		412854CA230E245B0084E699 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		412854CD230E245B0084E699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		412854CF230E245D0084E699 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		412854D2230E245D0084E699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		412854D4230E245D0084E699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		412854D9230E245D0084E699 /* Season-Foods-NaviTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Season-Foods-NaviTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +58,7 @@
 		418347AF2313B20500ACDECD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		418347B12315048B00ACDECD /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		418347B3231519C100ACDECD /* FoodInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoViewController.swift; sourceTree = "<group>"; };
+		418EBAC82318F3E2006EA0CA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		71B3185F54A6F7D766900C31 /* Pods_Season_Foods_Navi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Season_Foods_Navi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7256E3F098A90E754610E704 /* Pods-Season-Foods-Navi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Season-Foods-Navi.release.xcconfig"; path = "Target Support Files/Pods-Season-Foods-Navi/Pods-Season-Foods-Navi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,9 +131,9 @@
 				411BA39B230E7C22001CB034 /* recipis.swift */,
 				41285505230E2BB50084E699 /* Menucell.swift */,
 				412854CC230E245B0084E699 /* Main.storyboard */,
-				412854CF230E245D0084E699 /* Assets.xcassets */,
 				412854D1230E245D0084E699 /* LaunchScreen.storyboard */,
 				412854D4230E245D0084E699 /* Info.plist */,
+				418EBAC82318F3E2006EA0CA /* Images.xcassets */,
 			);
 			path = "Season-Foods-Navi";
 			sourceTree = "<group>";
@@ -271,8 +271,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418EBAC92318F3E2006EA0CA /* Images.xcassets in Resources */,
 				412854D3230E245D0084E699 /* LaunchScreen.storyboard in Resources */,
-				412854D0230E245D0084E699 /* Assets.xcassets in Resources */,
 				412854CE230E245B0084E699 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +521,7 @@
 			baseConfigurationReference = 3D13C9325C140B6B934E20D8 /* Pods-Season-Foods-Navi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UF6465UXER;
 				INFOPLIST_FILE = "Season-Foods-Navi/Info.plist";
@@ -540,6 +541,7 @@
 			baseConfigurationReference = 7256E3F098A90E754610E704 /* Pods-Season-Foods-Navi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UF6465UXER;
 				INFOPLIST_FILE = "Season-Foods-Navi/Info.plist";

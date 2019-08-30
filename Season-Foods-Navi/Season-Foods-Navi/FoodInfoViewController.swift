@@ -16,7 +16,18 @@ import Charts
 let foodjson = """
 {
 "monthly_cost": [100,110,120,130,140,150,160,170,180,190,200,190,180],
-"eiyou":["炭水化物","ビタミン","リコピン"],
+"eiyou":{ "food": '穀類/あわ/精白粒',
+"info":
+[ { "name": "エネルギー", "value": "367", "unit": "kcal" },
+{ "name": "たんぱく質", "value": "11.2", "unit": "g" },
+{ "name": "脂質", "value": "4.4", "unit": "g" },
+{ "name": "炭水化物", "value": "69.7", "unit": "g" },
+{ "name": "ナトリウム", "value": "1", "unit": "mg" },
+{ "name": "カリウム", "value": "300", "unit": "mg" },
+{ "name": "カルシウム", "value": "14", "unit": "mg" },
+{ "name": "マグネシウム", "value": "110", "unit": "mg" },
+{ "name": "コレステロール", "value": "", "unit": "mg" },
+{ "name": "食塩相当量", "value": "0", "unit": "g" } ] },
 "syun":[2,3,4,5],
 "name":"宇宙"
 }
@@ -86,6 +97,7 @@ class FoodInfoViewController:UIViewController,UIScrollViewDelegate{
         self.view.addSubview(scrollView)
     }
     func setchart(){
+        if foodInfo == nil{return}
         barView = LineChartView()
         barView.frame = CGRect(x:0,y:self.view.frame.height/3,width:self.view.frame.width,height:self.view.frame.height/3 )
         var entries:[BarChartDataEntry] = []
