@@ -2,6 +2,7 @@ version: '3'
 services:
   app:
     image: node:10.16.3
+    user: "node"
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
