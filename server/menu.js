@@ -1,6 +1,7 @@
 'use strict';
 require('dotenv').config();
 const request = require('request');
+var pref = require('./GetPrefecture');
 
 const RECIPE_CATEGORY_URL = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426";
 const RECIPE_RANKING_URL = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426";
@@ -22,7 +23,7 @@ const shuffle = ([...arr]) => {
 	return arr;
 };
 
-function GetRecipe()
+function GetRecipe(urlInfo)
 {
 	/*
 	1. 楽天レシピAPIからカテゴリ一覧を取得
@@ -37,6 +38,15 @@ function GetRecipe()
 	let match_categories = [];
 	let result = [];
 	let res_JSON = {};
+
+	// 緯度・経度が両方揃っている時
+	if (urlInfo.query.lat && urlInfo.query.long) {
+		let pos = {}
+		pos.lat = urlInfo.query.lat
+		pos.long = urlInfo.query.long
+
+		const prefecture = pref.GetPrefecture(pos.long, pos.lat);
+	}
 
 	const response = new Promise((resolve, reject) => {
 		const get_categories = async function() {

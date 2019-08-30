@@ -10,7 +10,7 @@ var REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=searc
 
 function GetPrefecture(longitude,latitude){
     REQUEST_PREFECTURE_URL += '&x=' + longitude + '&y=' + latitude;
-    console.log(REQUEST_PREFECTURE_URL);
+    // console.log(REQUEST_PREFECTURE_URL);
     http.get(REQUEST_PREFECTURE_URL, (res) => {
         let body = '';
         res.on('data',(chunk) => {
@@ -18,16 +18,21 @@ function GetPrefecture(longitude,latitude){
         });
         
         res.on('end',(res) => {
-            console.log(body);
+            // console.log(body);
             if(body.indexOf('error') >= 0){
                 res = "null";
             }else{
                 res = JSON.parse(body).response.location[0].prefecture;
             }
-            console.log(res);
+            // console.log(res);
+            return res
         });
     }).on('error', (e) => {
         console.log(e.message);
     });
     
+}
+
+module.exports = {
+	GetPrefecture: GetPrefecture,
 }
