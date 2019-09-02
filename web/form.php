@@ -15,7 +15,6 @@ if(isset($_POST['submit_1'])) {
     $base_food = (string)filter_input(INPUT_POST, 'base_food');
     $months = $_POST['month'];
     $post = 1;
-    $months_string = "[";
     $i = 0;
     foreach($months as $row) {
         if($i != 0) {
@@ -24,7 +23,6 @@ if(isset($_POST['submit_1'])) {
         $months_string.=$row;
         $i+=1;
     }
-    $months_string .= "]";
     // 画像関連処理
     $tmp_file_name = $_FILES['image']['tmp_name'];
     $image_path = '../images/';
@@ -41,7 +39,6 @@ if(isset($_POST['submit_1'])) {
     $result -> bindParam(':pref_id',$prefecture,PDO::PARAM_INT);
     $result -> bindParam(':post',$post,PDO::PARAM_INT);
     $result -> execute();
-    echo '<h3>食材の投稿が完了しました</h3>';
 }
 // 献立
 if(isset($_POST['submit_2'])) {
@@ -52,7 +49,6 @@ if(isset($_POST['submit_2'])) {
     $howto = (string)filter_input(INPUT_POST, 'howto');
     $post = 1;
     $foods_post = $_POST['foods'];
-    $foods_string = "[";
     $i = 0;
     foreach($foods_post as $row) {
         if($i != 0) {
@@ -61,7 +57,6 @@ if(isset($_POST['submit_2'])) {
         $foods_string.=$row;
         $i+=1;
     }
-    $foods_string .= "]";
     // 画像関連処理
     $tmp_file_name = $_FILES['image']['tmp_name'];
     $image_path = '../images/';
@@ -79,7 +74,6 @@ if(isset($_POST['submit_2'])) {
     $result -> bindParam(':howto', $howto, PDO::PARAM_STR);
     $result -> bindParam(':post', $post, PDO::PARAM_INT);
     $result -> execute();
-    echo '<h3>献立の投稿が完了しました</h3>';
 }
 function picutre_resize($base_picture) {
     list($width, $hight) = getimagesize($base_picture); // 元の画像名を指定してサイズを取得
@@ -92,6 +86,4 @@ function picutre_resize($base_picture) {
     $base_picture = preg_replace($pattern, '', $base_picture);
     imagejpeg($image, $base_picture.'-thumbnail'.'.jpg');
 }
-/**
- * TODO: formへの送信をajaxにして画面遷移させないようにする
- */
+header('Location: ./index.php');
