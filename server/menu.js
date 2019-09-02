@@ -62,30 +62,10 @@ async function GetRecipe(urlInfo)
 		try {
 			let results = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
 			pos_id = results[0].id
-			pool.end(); // mysqlのコネクションのプロセスを終了させる。（2018-11-07追記）
 		} catch (err) {
 			throw new Error(err)
 		}
 
-		console.log(pos_id)
-
-	// 	pool.getConnection(function(err, connection){
-	// 		if(err) { // throwすると、コネクションに1回でもミスしたら終了してしまう
-	// 			console.log(err)
-	// 			return
-	// 		}
-	// 		connection.query( 'SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture], function(err, rows, fields){
-	// 			if(err) throw err;
-
-	// 			console.log(rows)
-	// 			console.log(rows[0])
-	// 			pos_id = rows[0].id
-
-	// 			connection.release();
-	// 		});
-
-	// 		console.log(pos_id)
-	// 	});
 	}
 
 	const response = new Promise((resolve, reject) => {
