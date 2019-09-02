@@ -1,6 +1,16 @@
 'use strict';
 require('dotenv').config();
 const request = require('request');
+const mysql = require('mysql');
+const util = require('util');
+const pool  = mysql.createPool({
+	connectionLimit : 10,
+	host            : 'mariadb',
+	user            : 'SeasonFoodsNavi',
+	password        : 'SeasonFoodsNavi',
+	database        : 'season_foods_navi',
+});
+pool.query = util.promisify(pool.query);
 var pref = require('./GetPrefecture');
 
 const RECIPE_CATEGORY_URL = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426";
@@ -23,7 +33,7 @@ const shuffle = ([...arr]) => {
 	return arr;
 };
 
-function GetRecipe(urlInfo)
+async function GetRecipe(urlInfo)
 {
 	/*
 	1. 楽天レシピAPIからカテゴリ一覧を取得
@@ -42,10 +52,40 @@ function GetRecipe(urlInfo)
 	// 緯度・経度が両方揃っている時
 	if (urlInfo.query.lat && urlInfo.query.long) {
 		let pos = {}
+		let pos_id
 		pos.lat = urlInfo.query.lat
 		pos.long = urlInfo.query.long
 
-		const prefecture = pref.GetPrefecture(pos.long, pos.lat);
+		const prefecture = await pref.GetPrefecture(pos.long, pos.lat);
+
+		// pool.query()はpool.getConnection() + connection.query() + connection.release()のショートカット
+		try {
+			let results = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
+			pos_id = results[0].id
+			pool.end(); // mysqlのコネクションのプロセスを終了させる。（2018-11-07追記）
+		} catch (err) {
+			throw new Error(err)
+		}
+
+		console.log(pos_id)
+
+	// 	pool.getConnection(function(err, connection){
+	// 		if(err) { // throwすると、コネクションに1回でもミスしたら終了してしまう
+	// 			console.log(err)
+	// 			return
+	// 		}
+	// 		connection.query( 'SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture], function(err, rows, fields){
+	// 			if(err) throw err;
+
+	// 			console.log(rows)
+	// 			console.log(rows[0])
+	// 			pos_id = rows[0].id
+
+	// 			connection.release();
+	// 		});
+
+	// 		console.log(pos_id)
+	// 	});
 	}
 
 	const response = new Promise((resolve, reject) => {
