@@ -8,6 +8,9 @@ import {
 import {
     getFood
 } from './getFood'
+import {
+    getNutritional
+} from './getNutritional'
 var configRoutes;
 var urlInfo;
 
@@ -49,9 +52,12 @@ configRoutes = function (app, server) {
 
 
     app.get('/api/v1/food/:id', async function (request, response) {
-        const id = await request.params.id;
-        const result = await searchFoodName(id);
-        const food = await getFood(id)
+        const id = await request.params.id
+        const [
+            result,
+            food,
+            nutritional
+        ] = await Promise.all([searchFoodName(id), getFood(id), getNutritional(id)])
         const response_object = {}
         response_object['food_info'] = {
             id: food.id,
@@ -63,7 +69,12 @@ configRoutes = function (app, server) {
             post: food.post
         }
         response_object['prices'] = result
-        response.send(response_object);
+        if (nutritional === '') {
+            response_object['nutritional'] = null
+        } else {
+            response_object['nutritional'] = nutritional
+        }
+        response.send(response_object)
     })
 }
 
