@@ -5,6 +5,9 @@ var menu = require('./menu');
 import {
     searchFoodName
 } from './getPrice'
+import {
+    getFood
+} from './getFood'
 var configRoutes;
 var urlInfo;
 
@@ -48,8 +51,19 @@ configRoutes = function (app, server) {
     app.get('/api/v1/food/:id', async function (request, response) {
         const id = await request.params.id;
         const result = await searchFoodName(id);
-        // console.log('帰ってきたよ: ' + result)
-        response.send(result);
+        const food = await getFood(id)
+        const response_object = {}
+        response_object['food_info'] = {
+            id: food.id,
+            name: food.name,
+            base_food: food.base_food,
+            picture: food.picture,
+            months: food.months,
+            pref_id: food.pref_id,
+            post: food.post
+        }
+        response_object['prices'] = result
+        response.send(response_object);
     })
 }
 
