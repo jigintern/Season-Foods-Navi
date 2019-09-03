@@ -14,10 +14,60 @@ const searchFoodPrice = (name) => {
             }
         }
         getAllFoodsPrice()
-        const response = []
-        const foods = [fruits, seafoods, vegetables]
+        const foods2 = [
+            ...fruits.map((month, m) => {
+                return month
+                    .filter(f => f.name === name)
+                    .map(f => {
+                        f.month = m
+                        return f
+                    })
+            }),
+            ...seafoods.map((month, m) => {
+                return month.filter(s => s.name === name)
+                    .map(f => {
+                        f.month = m
+                        return f
+                    })
+            }),
+            ...vegetables.map((month, m) => {
+                return month.filter(v => v.name === name)
+                    .map(f => {
+                        f.month = m
+                        return f
+                    })
+            })
+        ]
+        const foods = []
+        foods2.forEach(f => {
+            f.forEach(ff => {
+                foods.push(ff)
+            })
+        })
+        console.log(foods)
+        // foods[i] = {
+        //    name: みかん,
+        //    HighPrice: 200,
+        //    MediumPeice: 190,
+        //    place: 福井県,
+        //    month: 0
+        // }...×n個
+
+        const response = foods.reduce((map, food) => {
+            if (!food.place in map) {
+                map[food.place] = {
+                    HighPrice: ['-', '-', '-', '-', '-', '-', '-', '-'],
+                    MediumPrice: ['-', '-', '-', '-', '-', '-', '-', '-']
+                }
+            }
+            // map[food.place].HighPrice[food.month] = food.HighPrice
+            // map[food.place].MediumPrice[food.month] = food.MediumPrice
+            return map
+        })
+        console.log(response)
         /*
         ~ foodsの中身 ~
+        console.log(foods)
         foods = [
             [
                 [
@@ -34,15 +84,65 @@ const searchFoodPrice = (name) => {
             []
         ]
         */
-        for (let i = 0; i < foods.length; i++) {
-            foods[i].forEach((element, idx_1) => {
-                element.forEach((food, idx_2) => {
-                    if (food.name === name) {
-                        console.log(food)
-                    }
-                })
-            })
-        }
+        // const places = []
+        // for (let i = 0; i < foods.length; i++) {
+        //     foods[i].forEach((element, idx_1) => {
+        //         element.forEach((food, idx_2) => {
+        //             if (food.name === name) {
+        //                 if (places.indexOf(food.place) == -1) {
+        //                     places.push(food.place)
+        //                 } else {
+
+        //                 }
+        //             }
+        //         })
+        //     })
+        // }
+        // console.log(places)
+        // const object = {}
+        // const highprice = []
+        // const mediumprice = []
+
+        // let placeNum = 0
+        // let flag = 0
+        // let initplace = "null"
+        // for (let i = 0; i < foods.length; i++) {
+        //     foods[i].forEach((element, idx_1) => {
+        //         element.forEach((food, idx_2) => {
+        //             console.log(placeNum)
+        //             if (food.name === name) {
+        //                 console.log(initplace)
+
+        //                 if (placeNum === 0 && initplace === "null") {
+        //                     initplace = food.place
+        //                 }
+        //                 if (placeNum != 0 && food.place === initplace) {
+        //                     console.log(placeNum + "found");
+        //                     placeNum = 0;
+        //                     flag = 1
+        //                 }
+
+        //                 //console.log(food)
+        //                 object['place'] = food.place
+        //                 if (flag) {
+        //                     highprice[placeNum].push(food.HighPrice)
+        //                     mediumprice[placeNum].push(food.MediumPrice)
+        //                 } else {
+        //                     const highprice_0 = food.HighPrice
+        //                     const midiumprice_0 = food.MidiumPrice
+        //                     highprice.push(highprice_0)
+        //                     mediumprice.push(midiumprice_0)
+        //                 }
+        //                 placeNum++
+        //             }
+        //         })
+        //     })
+        // }
+        // object['HighPrice'] = highprice
+        // object['MediumPrice'] = mediumprice
+        // response.push(object);
+        resolve('test');
+
         const dummy_response = [{
                 place: 'アメリカ合衆国',
                 HighPrice: [
@@ -64,42 +164,7 @@ const searchFoodPrice = (name) => {
                 ]
             }
         ]
-        resolve(dummy_response)
-        // const response = []
-        // const highPrice_1 = []
-        // const highPrice_2 = []
-        // const mediumPrice_1 = []
-        // const mediumPrice_2 = []
-        // const object_1 = {}
-        // const object_2 = {}
-        // let cnt = 0
-
-        // for (let i = 0; i < fruits.length; i++) {
-        //     fruits[i].filter((item, idx) => {
-        //         if (item.name === name) {
-        //             if (cnt % 2 === 0) {
-        //                 object_1['place'] = item.place
-        //                 highPrice_1.push(item.HighPrice)
-        //                 mediumPrice_1.push(item.MediumPrice)
-        //             } else {
-        //                 object_2['place'] = item.place
-        //                 highPrice_2.push(item.HighPrice)
-        //                 mediumPrice_2.push(item.MediumPrice)
-        //             }
-        //             console.log('あった!! 月: ' + i + ' : ' + cnt)
-        //             cnt++
-        //         } else if (i === fruits.length - 1) {
-
-        //         }
-        //     })
-        // }
-        // object_1['HighPrice'] = highPrice_1
-        // object_2['HighPrice'] = highPrice_2
-        // object_1['MediumPrice'] = mediumPrice_1
-        // object_2['MediumPrice'] = mediumPrice_2
-        // response.push(object_1)
-        // response.push(object_2)
-        // resolve(response)
+        // resolve(dummy_response)
     })
 }
 const all = async (id) => {
