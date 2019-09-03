@@ -43,9 +43,12 @@ const Shaping_recipe = (origin_recipe) => {
 		let shaped_food = {}
 
 		try {
-			// 食材IDの取得
-			let db_res = await pool.query('SELECT * FROM `foods` WHERE `name` LIKE ?', ['%' + food + '%'])
-			if (db_res.length == 0) console.log(food + ' is not found in the DB')
+			let shaped_name = food.replace(/★|☆|●|〇|◉|◎|・|　| /g , ''); // 記号・空白を除去
+			shaped_name = shaped_name.replace(/^お?/ , ''); // 「お」から始まる場合、「お」を削除
+			shaped_name = shaped_name.replace(/\(.*?\)|（.*?）/g , ''); // 括弧ごと削除
+			// 食材情報の取得
+			let db_res = await pool.query('SELECT * FROM `foods` WHERE `name` LIKE ?', ['%' + shaped_name + '%'])
+			if (db_res.length == 0) console.log(shaped_name + ' is not found in the DB')
 			if (db_res.length != 0) {
 				const food_id = db_res[0].id
 				// 旬か否かの判定
@@ -54,7 +57,7 @@ const Shaping_recipe = (origin_recipe) => {
 
 				shaped_food = {
 					id		: db_res[0].id,
-					name	: db_res[0].name,
+					name	: food, //shaped_name, //db_res[0].name,
 					syun	: syun,
 					pref_id	: db_res[0].pref_id,
 				}
