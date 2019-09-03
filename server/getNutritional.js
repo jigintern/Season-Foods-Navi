@@ -23,7 +23,7 @@ const searchNutritional = (food_name) => {
         nutritionals.nutritionals.forEach(element => {
             // console.log(element.food)
             if (element.food.indexOf(food_name) > -1) {
-                console.log(element.food)
+                // console.log(element.food)
                 resolve(element)
             }
         });
