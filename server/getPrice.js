@@ -44,127 +44,19 @@ const searchFoodPrice = (name) => {
                 foods.push(ff)
             })
         })
-        console.log(foods)
-        // foods[i] = {
-        //    name: みかん,
-        //    HighPrice: 200,
-        //    MediumPeice: 190,
-        //    place: 福井県,
-        //    month: 0
-        // }...×n個
-
         const response = foods.reduce((map, food) => {
-            if (!food.place in map) {
+            if (!(food.place in map)) {
                 map[food.place] = {
                     HighPrice: ['-', '-', '-', '-', '-', '-', '-', '-'],
                     MediumPrice: ['-', '-', '-', '-', '-', '-', '-', '-']
                 }
             }
-            // map[food.place].HighPrice[food.month] = food.HighPrice
-            // map[food.place].MediumPrice[food.month] = food.MediumPrice
+            map[food.place].HighPrice[food.month] = food.HighPrice
+            map[food.place].MediumPrice[food.month] = food.MediumPrice
             return map
-        })
+        }, {})
         console.log(response)
-        /*
-        ~ foodsの中身 ~
-        console.log(foods)
-        foods = [
-            [
-                [
-                    {
-                        name: みかん,
-                        HighPrice: 200,
-                        MediumPeice: 190,
-                        place: 福井県
-                    }...×n個
-                ],
-                [] ...×8個
-            ],
-            [],
-            []
-        ]
-        */
-        // const places = []
-        // for (let i = 0; i < foods.length; i++) {
-        //     foods[i].forEach((element, idx_1) => {
-        //         element.forEach((food, idx_2) => {
-        //             if (food.name === name) {
-        //                 if (places.indexOf(food.place) == -1) {
-        //                     places.push(food.place)
-        //                 } else {
-
-        //                 }
-        //             }
-        //         })
-        //     })
-        // }
-        // console.log(places)
-        // const object = {}
-        // const highprice = []
-        // const mediumprice = []
-
-        // let placeNum = 0
-        // let flag = 0
-        // let initplace = "null"
-        // for (let i = 0; i < foods.length; i++) {
-        //     foods[i].forEach((element, idx_1) => {
-        //         element.forEach((food, idx_2) => {
-        //             console.log(placeNum)
-        //             if (food.name === name) {
-        //                 console.log(initplace)
-
-        //                 if (placeNum === 0 && initplace === "null") {
-        //                     initplace = food.place
-        //                 }
-        //                 if (placeNum != 0 && food.place === initplace) {
-        //                     console.log(placeNum + "found");
-        //                     placeNum = 0;
-        //                     flag = 1
-        //                 }
-
-        //                 //console.log(food)
-        //                 object['place'] = food.place
-        //                 if (flag) {
-        //                     highprice[placeNum].push(food.HighPrice)
-        //                     mediumprice[placeNum].push(food.MediumPrice)
-        //                 } else {
-        //                     const highprice_0 = food.HighPrice
-        //                     const midiumprice_0 = food.MidiumPrice
-        //                     highprice.push(highprice_0)
-        //                     mediumprice.push(midiumprice_0)
-        //                 }
-        //                 placeNum++
-        //             }
-        //         })
-        //     })
-        // }
-        // object['HighPrice'] = highprice
-        // object['MediumPrice'] = mediumprice
-        // response.push(object);
-        resolve('test');
-
-        const dummy_response = [{
-                place: 'アメリカ合衆国',
-                HighPrice: [
-                    // ない月は '-' にする
-                    200, 200, 233, '-', '-', 259, 233, 250
-                ],
-                MediumPrice: [
-                    190, 190, 190, '-', '-', 190, 190, 200
-                ]
-            },
-            {
-                place: '福井県',
-                HighPrice: [
-                    // ない月は '-' にする
-                    200, 200, 233, '-', '-', 259, 233, 250
-                ],
-                MediumPrice: [
-                    190, 190, 190, '-', '-', 190, 190, 200
-                ]
-            }
-        ]
-        // resolve(dummy_response)
+        resolve(response)
     })
 }
 const all = async (id) => {
@@ -191,6 +83,3 @@ const searchPrefecture = (id) => {
 module.exports = {
     searchFoodName: all
 }
-/**
- * 値段データがないときは　"-"を入れるようにする
- */
