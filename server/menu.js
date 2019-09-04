@@ -237,7 +237,7 @@ function GetRecipe(urlInfo)
 						const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
 						const recipes = await GetRecipeRanking(category_id);
 						for (const recipe in recipes.result) {
-							//result.push(Shaping_recipe(recipes.result[recipe]));
+							result.push(Shaping_recipe(recipes.result[recipe]));
 						}
 					} catch (err) {
 						console.error(err);
