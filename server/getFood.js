@@ -17,7 +17,6 @@ const searchFood = (id) => {
     })
 }
 const all = async (id) => {
-    // console.log('1: all')
     const result = await searchFood(id)
     return result
 }
