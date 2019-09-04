@@ -12,7 +12,10 @@ const searchFood = (id) => {
             if (err) {
                 throw err
             }
-            resolve(row[0])
+            if (row.length == 0)
+                resolve('')
+            else
+                resolve(row[0].name)
         })
     })
 }
