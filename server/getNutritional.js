@@ -21,15 +21,11 @@ const searchFoodName = (id) => {
 const searchNutritional = (food_name) => {
     return new Promise((resolve, rejects) => {
         nutritionals.nutritionals.forEach(element => {
-            // console.log(element.food)
             if (element.food.indexOf(food_name) > -1) {
-                // console.log(element.food)
                 resolve(element)
             }
         });
         rejects('一致しませんでした')
-        // console.log(nutritionals.nutritionals.length)
-        // resolve('Nutritionals!!')
     })
 }
 const all = async (id) => {

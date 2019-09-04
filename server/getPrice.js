@@ -55,7 +55,6 @@ const searchFoodPrice = (name) => {
             map[food.place].MediumPrice[food.month] = food.MediumPrice
             return map
         }, {})
-        console.log(response)
         resolve(response)
     })
 }
