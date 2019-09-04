@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+html{}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,table,th,td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video, time[pubdate]
+{ margin: 0;padding: 0;}
+article, aside, canvas, details, figcaption, figure,main,
+footer, header, hgroup, menu, nav, section, summary, time[pubdate] {
+	display: block;
+}
+figure{ text-align:center;}
+figure img{ margin-left:auto; margin-right:auto;}
+figure figcaption{ text-align:left;}
+table{ border-collapse:collapse;border-spacing:0;}
+fieldset,img{ border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{ font-style:normal;font-weight:normal;}
+li{ list-style:none;}
+caption,th{ text-align:left;}
+h1,h2,h3,h4,h5,h6{ font-size:100%;font-weight:normal;}
+q:before,q:after{ content:'';}
+abbr,acronym { border:0;font-variant:normal;}
+sup { vertical-align:text-top;}
+sub { vertical-align:text-bottom;}
+input,textarea,select{ font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,textarea,select{ *font-size:100%;}
+legend{ color:#000000;}
+hr{ display:block; margin-top:2.0em; border:none; border-collapse:collapse; border-top:solid 1px #666666;}
+
+/* ReStyled */
+html{ background:#FFFFFF;}
+body{ 
+	margin:0; padding:0 0 0 0;
+  font-family: "Mplus 1p",'Noto Sans Japanese','游ゴシック', YuGothic, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Meiryo", "メイリオ", arial, helvetica, sans-serif;
+	line-height:1.8;
+	text-align:left;
+  font-weight:400;
+ font-size:15px;
+  border-collapse:collapse; word-wrap: break-word;
+  -webkit-text-size-adjust: 100%; 
+  color:#4d4d4d;
+}
+select,input,button,textarea{ font:93% arial,helvetica,clean,sans-serif;}
+table{font-size:inherit;font:100%;}
+pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+table{}
+th,td{ vertical-align:top;}
+img{ border:none; max-width:100%; height:auto;
+  image-rendering: auto;               /* CSS4 (Chrome) */
+}
+imgd{
+  -webkit-backface-visibility:hidden;
+  backface-visibility: hidden;
+  image-rendering: -webkit-crisp-edges;     /* Safari */
+  image-rendering: -moz-crisp-edges;        /* Firefox */
+  image-rendering: pixelated;               /* CSS4 (Chrome) */
+  -ms-interpolation-mode: nearest-neighbor; /* IE */
+}
+caption{ font-size:85%;}
+strong{ font-weight:600;}
+em{ font-weight:600; font-size:129%; font-style:normal;}
+a{ color:#00A0E9; text-decoration: none;} /* color:#202020;*/
+
+*{ 
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:after { content:""; display:block; clear:both;}
+
+
+
+h1+*,h2+*,h3+*,h4+*{ margin-top:1.0em;}
+.safety{ display:block; margin:0; padding:0; width:1px; height:1px; overflow:hidden; visibility:hidden;}
