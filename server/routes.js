@@ -55,7 +55,7 @@ configRoutes = function (app, server) {
         const id = await request.params.id
         if (!id.match(/\d+(?:\.\d+)?/)) {
             response.send('あほ しね')
-            next('faild')
+            return
         }
         const [
             result,
