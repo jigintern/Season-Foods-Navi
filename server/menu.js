@@ -83,7 +83,7 @@ const Shaping_recipe = (origin_recipe) => {
 		cal		: null,
 		pref_id	: 0,
 		prefecture	: 'ALL',
-		howto	: origin_recipe.recipeDescription + '\n' + origin_recipe.recipeUrl,
+		howto	: origin_recipe.recipeUrl,
 		post	: false,
 		cost	: origin_recipe.recipeCost,
 		time	: origin_recipe.recipeIndication,
