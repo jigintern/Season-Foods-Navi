@@ -53,6 +53,10 @@ configRoutes = function (app, server) {
 
     app.get('/api/v1/food/:id', async function (request, response) {
         const id = await request.params.id
+        if (!id.match(/\d+(?:\.\d+)?/)) {
+            response.send('あほ しね')
+            next('faild')
+        }
         const [
             result,
             food,
