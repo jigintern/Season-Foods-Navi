@@ -93,7 +93,7 @@ const Shaping_recipe = (origin_recipe) => {
 };
 
 
-async function GetRecipe(urlInfo)
+function GetRecipe(urlInfo)
 {
 	/*
 	1. 楽天レシピAPIからカテゴリ一覧を取得
@@ -107,42 +107,101 @@ async function GetRecipe(urlInfo)
 	let food_name = [];
 	let match_categories = [];
 	let result = [];
+	let result_shuffle = [];
 	let res_JSON = {};
 
-	// // 緯度・経度が両方揃っている時
-	// if (urlInfo.query.lat && urlInfo.query.long) {
-	// 	let pos = {}
-	// 	let pos_id
-	// 	let db_res // DBの結果用
-	// 	pos.lat = urlInfo.query.lat
-	// 	pos.long = urlInfo.query.long
-
-	// 	const prefecture = await pref.GetPrefecture(pos.long, pos.lat);
-
-	// 	// pool.query()はpool.getConnection() + connection.query() + connection.release()のショートカット
-	// 	try {
-	// 		// 県IDの取得
-	// 		db_res = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
-	// 		pos_id = db_res[0].id
-	// 		// 郷土料理の検索
-	// 		db_res = await pool.query('SELECT * FROM `recipes` WHERE `pref_id` = ?', [pos_id])
-	// 		result.push(db_res)
-	// 		// 地元食材を検索
-	// 		food_name = await pool.query('SELECT * FROM `foods` WHERE `pref_id` = ?', [pos_id])
-	// 		food_name.map()
-
-
-	// 		// 地元食材を使ったレシピを検索
-	// 		// 1. 地元食材を検索
-	// 		// 2. 該当する食材について、もとの食材でレシピAPIを叩く
-	// 		// 3. その結果を出力に混ぜる
-	// 	} catch (err) {
-	// 		throw new Error(err)
-	// 	}
-
-	// }
-
 	const response = new Promise((resolve, reject) => {
+
+		// JSONに格納前に郷土料理を追加
+		const local_recipe = async function() {
+			// 緯度・経度が両方揃ってはいない時
+			if (!(urlInfo.query.lat && urlInfo.query.long))
+				return
+
+			let pos = {}
+			let pos_id
+			let db_res // DBの結果用
+			pos.lat = urlInfo.query.lat
+			pos.long = urlInfo.query.long
+
+			match_categories = []
+
+			const prefecture = await pref.GetPrefecture(pos.long, pos.lat);
+			if (prefecture == "null") return
+
+			// pool.query()はpool.getConnection() + connection.query() + connection.release()のショートカット
+			try {
+				// 県IDの取得
+				db_res = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
+				pos_id = db_res[0].id
+
+				// 地元食材を検索
+				db_res = await pool.query('SELECT * FROM `foods` WHERE `pref_id` = ?', [pos_id])
+
+				// 地元食材と合致するカテゴリを抽出
+				const mc = await new Promise((resolve, reject) => {
+					db_res.map(async (local_food) => {
+						let base_food
+						base_food = local_food
+
+						if (local_food.base_food)
+							base_food = await pool.query('SELECT * FROM `foods` WHERE `id` = ?', [local_food.base_food])
+						const base_food_name = base_food[0].name
+						const base_food_name_katakana = base_food_name.replace(/[ぁ-ん]/g, function(s) {
+							return String.fromCharCode(s.charCodeAt(0) + 0x60);
+						});
+
+						for (const category_type in categories.result) {
+							const match_category = categories.result[category_type].filter(function(item, index){
+								if ((item.categoryName).indexOf(base_food_name) >= 0 || (item.categoryName).indexOf(base_food_name_katakana) >= 0) return true;
+							});
+							if (match_category.length > 0)
+								match_categories.push(match_category)
+						}
+
+						// 重複除去
+						match_categories = match_categories.filter(function (x, i, self) {
+							return self.indexOf(x) === i;
+						});
+
+						resolve(match_categories)
+					});
+				})
+				console.log("match_categories.length " + match_categories.length)
+
+				//特定のカテゴリのランキングを取得して出力
+				for (const match_category in match_categories) {
+					for (const single in match_categories[match_category]) {
+						try {
+							await wait(1); // API制限の回避
+		
+							const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
+							const recipes = await GetRecipeRanking(category_id);
+							for (const recipe in recipes.result) {
+								result_shuffle.unshift(Shaping_recipe(recipes.result[recipe]));
+							}
+						} catch (err) {
+							console.error(err);
+						}
+					}
+				}
+
+				// 郷土料理の検索
+				db_res = await pool.query('SELECT * FROM `recipes` WHERE `pref_id` = ?', [pos_id])
+				db_res.map((local_recipe) => {
+					result_shuffle.unshift(local_recipe)
+				});
+
+				// 地元食材を使ったレシピを検索
+				// 1. 地元食材を検索
+				// 2. 該当する食材について、もとの食材でレシピAPIを叩く
+				// 3. その結果を出力に混ぜる
+			} catch (err) {
+				throw new Error(err)
+			}
+		}
+
+
 		const get_categories = async function() {
 			categories = await GetCategoryList();
 		}
@@ -155,7 +214,7 @@ async function GetRecipe(urlInfo)
 					food_name.push(season_food.name);
 				}
 			});
-	
+
 			// 旬の食材と合致するカテゴリを抽出
 			food_name.map((name) => {
 				for (const category_type in categories.result) {
@@ -178,18 +237,16 @@ async function GetRecipe(urlInfo)
 						const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
 						const recipes = await GetRecipeRanking(category_id);
 						for (const recipe in recipes.result) {
-							result.push(Shaping_recipe(recipes.result[recipe]));
-							// result.push(recipes.result[recipe]);
+							//result.push(Shaping_recipe(recipes.result[recipe]));
 						}
 					} catch (err) {
 						console.error(err);
 					}
 				}
 			}
-			// console.log(result) 
-			const result_shuffle = shuffle(result) // 同じ食材を使ったレシピが集まるのを回避
+			result_shuffle = shuffle(result) // 同じ食材を使ったレシピが集まるのを回避
+			await local_recipe(); // 郷土料理を追加
 			res_JSON = JSON.stringify({result: result_shuffle})
-			// res_JSON[result.all] = result.length;
 		}
 	
 		const processAll = async function() {
