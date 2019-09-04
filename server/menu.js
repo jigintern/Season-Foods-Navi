@@ -33,7 +33,7 @@ const shuffle = ([...arr]) => {
 	return arr;
 };
 
-const Shaping_recipe = (origin_recipe) => {
+const Shaping_recipe = (origin_recipe, pos_long, pos_lat) => {
 	const date = new Date();
 	const now_month = date.getMonth()+1;
 	const foods = origin_recipe.recipeMaterial
@@ -47,19 +47,30 @@ const Shaping_recipe = (origin_recipe) => {
 			shaped_name = shaped_name.replace(/^お?/ , ''); // 「お」から始まる場合、「お」を削除
 			shaped_name = shaped_name.replace(/\(.*?\)|（.*?）/g , ''); // 括弧ごと削除
 			// 食材情報の取得
-			let db_res = await pool.query('SELECT * FROM `foods` WHERE `name` LIKE ?', ['%' + shaped_name + '%'])
-			if (db_res.length == 0) console.log(shaped_name + ' is not found in the DB')
-			if (db_res.length != 0) {
-				const food_id = db_res[0].id
+			let food_info = await pool.query('SELECT * FROM `foods` WHERE `name` LIKE ?', ['%' + shaped_name + '%'])
+			if (food_info.length == 0) console.log(shaped_name + ' is not found in the DB')
+			if (food_info.length != 0) {
+				const food_id = food_info[0].id
 				// 旬か否かの判定
-				const months =  db_res[0].months.split(',');
+				const months =  food_info[0].months.split(',');
 				const syun = months.some(item => item  === String(now_month))
 
+				const prefecture = await pref.GetPrefecture(pos_long, pos_lat);
+				if (prefecture != "null" && pos_long != null || pos_lat != null) {
+					const pref = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
+					const pref_id = pref[0].id
+					const local_foods = await pool.query('SELECT * FROM `foods` WHERE `base_food` = ? AND `pref_id` = ?', [food_info[0].id, pref_id])
+					if (local_foods.length > 0) {
+						food = local_foods[0].name
+						console.log(food)
+					}
+				}
+
 				shaped_food = {
-					id		: db_res[0].id,
+					id		: food_info[0].id,
 					name	: food, //shaped_name, //db_res[0].name,
 					syun	: syun,
-					pref_id	: db_res[0].pref_id,
+					pref_id	: food_info[0].pref_id,
 				}
 			} else {
 				shaped_food = {
@@ -178,7 +189,7 @@ function GetRecipe(urlInfo)
 							const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
 							const recipes = await GetRecipeRanking(category_id);
 							for (const recipe in recipes.result) {
-								result_shuffle.unshift(Shaping_recipe(recipes.result[recipe]));
+								result_shuffle.unshift(Shaping_recipe(recipes.result[recipe], pos.long, pos.lat));
 							}
 						} catch (err) {
 							console.error(err);
@@ -237,7 +248,7 @@ function GetRecipe(urlInfo)
 						const category_id = match_categories[match_category][single].categoryUrl.match(/^https:\/\/recipe.rakuten.co.jp\/category\/(.*)\//)[1];
 						const recipes = await GetRecipeRanking(category_id);
 						for (const recipe in recipes.result) {
-							result.push(Shaping_recipe(recipes.result[recipe]));
+							result.push(Shaping_recipe(recipes.result[recipe], null, null));
 						}
 					} catch (err) {
 						console.error(err);
