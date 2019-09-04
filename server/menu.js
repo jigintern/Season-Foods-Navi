@@ -43,7 +43,7 @@ const Shaping_recipe = (origin_recipe) => {
 		let shaped_food = {}
 
 		try {
-			let shaped_name = food.replace(/★|☆|●|〇|◉|◎|・|　| /g , ''); // 記号・空白を除去
+			let shaped_name = food.replace(/★|☆|●|〇|◉|◎|・|【|】|◇|＊|■|◯|◆|―|　| /g , ''); // 記号・空白を除去
 			shaped_name = shaped_name.replace(/^お?/ , ''); // 「お」から始まる場合、「お」を削除
 			shaped_name = shaped_name.replace(/\(.*?\)|（.*?）/g , ''); // 括弧ごと削除
 			// 食材情報の取得
