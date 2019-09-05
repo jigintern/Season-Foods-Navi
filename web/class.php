@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 class DB{
 	private $dbh;
 	function __construct(){
@@ -11,7 +12,7 @@ class DB{
 			$dsn = "mysql:dbname={$DB_NAME};host={$DB_HOST};charset=utf8;";
             $this->dbh = new PDO($dsn,$DB_USER,$DB_PASSWORD);
 		}catch(PDOException $e){
-			echo 'Database Connection failed:'.'  '.$e->getMessage();
+			echo 'Database Connection failed:'.' '.$e->getMessage();
 			exit;
 		}
     }
@@ -22,5 +23,8 @@ class DB{
     // ユーザーからの入力を利用しない
 	function query($statement){
 		return $this->dbh->query($statement);
+	}
+	function lastinsertid() {
+		return $this->dbh->lastinsertid();
 	}
 }
