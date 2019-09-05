@@ -15,8 +15,8 @@ var configRoutes;
 var urlInfo;
 
 configRoutes = function (app, server) {
-    app.get('/', function (request, response) {
-        response.redirect('/index.html');
+    app.get('/api/', function (request, response) {
+        response.sendFile(__dirname + '/public/index.html');
     });
 
     //共通処理
