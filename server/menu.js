@@ -55,14 +55,16 @@ const Shaping_recipe = (origin_recipe, pos_long, pos_lat) => {
 				const months =  food_info[0].months.split(',');
 				const syun = months.some(item => item  === String(now_month))
 
-				const prefecture = await pref.GetPrefecture(pos_long, pos_lat);
-				if (prefecture != "null" && pos_long != null || pos_lat != null) {
-					const pref = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
-					const pref_id = pref[0].id
-					const local_foods = await pool.query('SELECT * FROM `foods` WHERE `base_food` = ? AND `pref_id` = ?', [food_info[0].id, pref_id])
-					if (local_foods.length > 0) {
-						food = local_foods[0].name
-						// console.log(food)
+				if (pos_long && pos_lat) {
+					const prefecture = await pref.GetPrefecture(pos_long, pos_lat);
+					if (prefecture) {
+						const pref = await pool.query('SELECT * FROM `prefecture` WHERE `name` = ?', [prefecture])
+						const pref_id = pref[0].id
+						const local_foods = await pool.query('SELECT * FROM `foods` WHERE `base_food` = ? AND `pref_id` = ?', [food_info[0].id, pref_id])
+						if (local_foods.length > 0) {
+							food = local_foods[0].name
+							// console.log(food)
+						}
 					}
 				}
 
@@ -138,7 +140,7 @@ function GetRecipe(urlInfo)
 			match_categories = []
 
 			const prefecture = await pref.GetPrefecture(pos.long, pos.lat);
-			if (prefecture == "null") return
+			if (prefecture === null) return
 
 			// pool.query()はpool.getConnection() + connection.query() + connection.release()のショートカット
 			try {
