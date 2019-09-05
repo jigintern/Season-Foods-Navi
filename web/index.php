@@ -23,7 +23,7 @@
                 <form action="./form.php" method="post" name="syokuzai" enctype="multipart/form-data">
                     <div>
                         <div class="input-field">
-                            <input placeholder="トマト" id="name" type="text" class="validate" name="name">
+                            <input placeholder="越前トマト" id="name" type="text" class="validate" name="name">
                             <label for="name">食材名</label>
                         </div>
                     </div>
@@ -140,7 +140,18 @@
                         <label for="foods">食材名</label>
                     </div>
                     <div class="input-field">
-                        <textarea id="textarea1" class="materialize-textarea" name="howto"></textarea>
+                        <textarea style="height: 30em;"id="textarea1" class="materialize-textarea" name="howto" data-length="400"
+                        placeholder="春さば１５０尾&#13;&#10;
+塩八貫目&#13;&#10;
+ぬか二斗&#13;&#10;
+1. さばを背開きにして内蔵をきれいにして水洗いする。
+   塩がよくきくように、目の玉も突いておく。&#13;&#10;
+2. 背を下にして樽に並べ、塩の半分を使って一週間ほど仮漬けする。
+   この時に出てくる塩汁は使うので、捨てずにとっておく。&#13;&#10;
+3. 約一週間後、本漬けする。
+   さばの腹に塩と米ぬかを詰めて桶に並べる。塩とぬかをふりかけて漬ける。
+   すべて漬け終わったら一面にぬかをふってから、表面を閉じるように塩をふりかける。&#13;&#10;
+4. 編みわらを桶の内回りに置いて押しぶたをし、少なくとも１０貫以上の重しをのせ、塩漬けした時にできた塩汁を、桶の中へ入れる。"></textarea>
                         <label for="textarea1">作り方</label>
                     </div>
                     <button class="btn" name="submit_2">送信</button>
