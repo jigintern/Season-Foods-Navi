@@ -204,9 +204,7 @@ h1 + *, h2 + *, h3 + *, h4 + * {
   width: 1000px;
   margin: 0 auto;
   min-height: 500px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  margin-top: 2em;
 }
 
 .mc > div {
@@ -215,5 +213,15 @@ h1 + *, h2 + *, h3 + *, h4 + * {
 
 .mc > div > form {
   padding: .5em 1em;
+}
+
+.management {
+  width: 1000px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 /*# sourceMappingURL=import.css.map */
