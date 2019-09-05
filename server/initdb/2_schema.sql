@@ -32,3 +32,10 @@ CREATE TABLE IF NOT EXISTS season_foods_navi.recipes (
   KEY `pref_id` (`pref_id`),
   CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`pref_id`) REFERENCES `prefecture` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS season_foods_navi.userData (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
