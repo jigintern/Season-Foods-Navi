@@ -26,6 +26,8 @@ configRoutes = function (app, server) {
         // jsonでレスポンス（外部の人もアクセスできるようにAccess-Control-Allow-Originを設定）
         response.contentType('json');
         response.header('Access-Control-Allow-Origin', '*');
+        // リクエストの表示
+        console.log(`Access : [${request.ip}] [${request.originalUrl}] [${request.get('User-Agent')}]`)
         next();
     });
 

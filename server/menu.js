@@ -48,7 +48,7 @@ const Shaping_recipe = (origin_recipe, pos_long, pos_lat) => {
 			shaped_name = shaped_name.replace(/\(.*?\)|（.*?）/g , ''); // 括弧ごと削除
 			// 食材情報の取得
 			let food_info = await pool.query('SELECT * FROM `foods` WHERE `name` LIKE ?', ['%' + shaped_name + '%'])
-			if (food_info.length == 0) console.log(shaped_name + ' is not found in the DB')
+			// if (food_info.length == 0) console.log(shaped_name + ' is not found in the DB')
 			if (food_info.length != 0) {
 				const food_id = food_info[0].id
 				// 旬か否かの判定
@@ -62,7 +62,7 @@ const Shaping_recipe = (origin_recipe, pos_long, pos_lat) => {
 					const local_foods = await pool.query('SELECT * FROM `foods` WHERE `base_food` = ? AND `pref_id` = ?', [food_info[0].id, pref_id])
 					if (local_foods.length > 0) {
 						food = local_foods[0].name
-						console.log(food)
+						// console.log(food)
 					}
 				}
 
@@ -178,7 +178,7 @@ function GetRecipe(urlInfo)
 						resolve(match_categories)
 					});
 				})
-				console.log("match_categories.length " + match_categories.length)
+				// console.log("match_categories.length " + match_categories.length)
 
 				//特定のカテゴリのランキングを取得して出力
 				for (const match_category in match_categories) {
