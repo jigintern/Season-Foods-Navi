@@ -1,3 +1,15 @@
+<?php
+// require('./flags.php');
+session_start();
+// ログイン状態チェック
+if (!isset($_SESSION["NAME"])) {
+    header("Location: Login.php");
+    exit;
+}
+// $login = new LL;
+// $is_login = $login -> IsLogin();
+// var_dump($is_login);
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,26 +21,26 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-<header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">旬食ナビ</a>
-        </div>
-    </nav>
-    </header>
+    <?php include('./header.php') ?>
     <main>
+        <style>
+        .mc {
+            display: flex;
+        }
+        </style>
         <div class="mc">
             <div class="syokuzai">
                 <h3>ローカル食材</h3>
                 <form action="./form.php" method="post" name="syokuzai" enctype="multipart/form-data">
                     <div>
                         <div class="input-field">
-                            <input placeholder="トマト" id="name" type="text" class="validate" name="name">
+                            <input placeholder="越前トマト" id="name" type="text" class="validate" name="name">
                             <label for="name">食材名</label>
                         </div>
                     </div>
                     <div>
                         <label for="">食材画像</label>
+                        <p>.jpgじゃないと泣いちゃう</p>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>File</span>
@@ -119,6 +131,7 @@
                         </div>
                         <div>
                             <label for="">献立画像</label>
+                        <p>.jpgじゃないと泣いちゃう</p>
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span>File</span>
@@ -140,7 +153,18 @@
                         <label for="foods">食材名</label>
                     </div>
                     <div class="input-field">
-                        <textarea id="textarea1" class="materialize-textarea" name="howto"></textarea>
+                        <textarea style="height: 30em;"id="textarea1" class="materialize-textarea" name="howto" data-length="400"
+                        placeholder="春さば１５０尾&#13;&#10;
+塩八貫目&#13;&#10;
+ぬか二斗&#13;&#10;
+1. さばを背開きにして内蔵をきれいにして水洗いする。
+   塩がよくきくように、目の玉も突いておく。&#13;&#10;
+2. 背を下にして樽に並べ、塩の半分を使って一週間ほど仮漬けする。
+   この時に出てくる塩汁は使うので、捨てずにとっておく。&#13;&#10;
+3. 約一週間後、本漬けする。
+   さばの腹に塩と米ぬかを詰めて桶に並べる。塩とぬかをふりかけて漬ける。
+   すべて漬け終わったら一面にぬかをふってから、表面を閉じるように塩をふりかける。&#13;&#10;
+4. 編みわらを桶の内回りに置いて押しぶたをし、少なくとも１０貫以上の重しをのせ、塩漬けした時にできた塩汁を、桶の中へ入れる。"></textarea>
                         <label for="textarea1">作り方</label>
                     </div>
                     <button class="btn" name="submit_2">送信</button>

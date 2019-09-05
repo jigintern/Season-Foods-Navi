@@ -2,7 +2,7 @@
 
 const http = require('http');
 
-var REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation"
+const REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation"
 
 //var x = 136.180764, y = 35.966679; 
 //console.log(JSON.parse(GetPrefecture(x,y)).response.location[0].prefecture);
@@ -10,9 +10,9 @@ var REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=searc
 
 async function GetPrefecture(longitude,latitude){
     const pref = await new Promise((resolve, reject) => {
-        REQUEST_PREFECTURE_URL += '&x=' + longitude + '&y=' + latitude;
+        const request_url = REQUEST_PREFECTURE_URL + '?x=' + longitude + '&y=' + latitude;
         // console.log(REQUEST_PREFECTURE_URL);
-        http.get(REQUEST_PREFECTURE_URL, (res) => {
+        http.get(request_url, (res) => {
             let body = '';
             res.on('data',(chunk) => {
                 body += chunk;
@@ -21,9 +21,17 @@ async function GetPrefecture(longitude,latitude){
             res.on('end',(res) => {
                 // console.log(body);
                 if(body.indexOf('error') >= 0){
-                    res = "null";
+                    res = null;
                 }else{
-                    res = JSON.parse(body).response.location[0].prefecture;
+                    try {
+                        res = JSON.parse(body).response.location[0].prefecture;
+                    }
+                    catch (e) {
+                        console.log(REQUEST_PREFECTURE_URL);
+                        console.log(e)
+                        console.log(`body: ${body}`)
+                        res = ''
+                    }
                 }
                 // console.log(res);
                 resolve(res)

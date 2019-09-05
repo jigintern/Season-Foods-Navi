@@ -21,11 +21,18 @@ configRoutes = function (app, server) {
 
     //共通処理
     app.all('/api/*', function (request, response, next) {
+        let hrstart = process.hrtime();
+        response.on('finish', function() {
+            let hrtime = process.hrtime(hrstart);
+            console.info('Execution time: %ds %dms', hrtime[0], hrtime[1] / 1000000);
+        });
         // クエリー文字列を含めてurl情報を取得（trueオプションでクエリ文字列も取得）
         urlInfo = url.parse(request.url, true);
         // jsonでレスポンス（外部の人もアクセスできるようにAccess-Control-Allow-Originを設定）
         response.contentType('json');
         response.header('Access-Control-Allow-Origin', '*');
+        // リクエストの表示
+        console.log(`Access : [${request.ip}] [${request.originalUrl}] [${request.get('User-Agent')}]`)
         next();
     });
 
