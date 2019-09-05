@@ -8,11 +8,14 @@ const searchFood = (id) => {
         database: 'season_foods_navi'
     })
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM foods WHERE id=${id}`, function (err, row, field) {
+        connection.query(`SELECT * FROM foods WHERE id=?`, [id], function (err, row, field) {
             if (err) {
                 throw err
             }
-            resolve(row[0])
+            if (row.length == 0)
+                resolve('')
+            else
+                resolve(row[0])
         })
     })
 }
