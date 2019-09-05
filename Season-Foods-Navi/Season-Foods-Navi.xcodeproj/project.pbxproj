@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410DE45E231E3987004BFE9B /* titleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410DE45D231E3987004BFE9B /* titleViewController.swift */; };
 		411BA39C230E7C22001CB034 /* recipis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411BA39B230E7C22001CB034 /* recipis.swift */; };
 		411BA39F230F73C7001CB034 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854CA230E245B0084E699 /* ViewController.swift */; };
 		412854C9230E245B0084E699 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412854C8230E245B0084E699 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		3D13C9325C140B6B934E20D8 /* Pods-Season-Foods-Navi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Season-Foods-Navi.debug.xcconfig"; path = "Target Support Files/Pods-Season-Foods-Navi/Pods-Season-Foods-Navi.debug.xcconfig"; sourceTree = "<group>"; };
+		410DE45D231E3987004BFE9B /* titleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleViewController.swift; sourceTree = "<group>"; };
 		411BA39B230E7C22001CB034 /* recipis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipis.swift; sourceTree = "<group>"; };
 		412854C5230E245B0084E699 /* Season-Foods-Navi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Season-Foods-Navi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		412854C8230E245B0084E699 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				412854CA230E245B0084E699 /* ViewController.swift */,
 				418347B12315048B00ACDECD /* RecipeViewController.swift */,
 				418347B3231519C100ACDECD /* FoodInfoViewController.swift */,
+				410DE45D231E3987004BFE9B /* titleViewController.swift */,
 				411BA39B230E7C22001CB034 /* recipis.swift */,
 				41285505230E2BB50084E699 /* Menucell.swift */,
 				412854CC230E245B0084E699 /* Main.storyboard */,
@@ -343,6 +346,7 @@
 				41285506230E2BB50084E699 /* Menucell.swift in Sources */,
 				412854C9230E245B0084E699 /* AppDelegate.swift in Sources */,
 				418347B4231519C100ACDECD /* FoodInfoViewController.swift in Sources */,
+				410DE45E231E3987004BFE9B /* titleViewController.swift in Sources */,
 				411BA39F230F73C7001CB034 /* ViewController.swift in Sources */,
 				411BA39C230E7C22001CB034 /* recipis.swift in Sources */,
 				418347B22315048B00ACDECD /* RecipeViewController.swift in Sources */,
