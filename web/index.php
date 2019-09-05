@@ -3,7 +3,7 @@
 session_start();
 // ログイン状態チェック
 if (!isset($_SESSION["NAME"])) {
-    header("Location: Login.php");
+    header("Location: login.php");
     exit;
 }
 // $login = new LL;
