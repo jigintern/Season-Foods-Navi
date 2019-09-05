@@ -75,7 +75,10 @@ const searchPrefecture = (id) => {
             if (err) {
                 throw err
             }
-            resolve(row[0].name)
+            if (row.length == 0)
+                resolve('')
+            else
+                resolve(row[0].name)
         })
     })
 }
