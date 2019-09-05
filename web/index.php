@@ -1,3 +1,15 @@
+<?php
+// require('./flags.php');
+session_start();
+// ログイン状態チェック
+if (!isset($_SESSION["NAME"])) {
+    header("Location: Login.php");
+    exit;
+}
+// $login = new LL;
+// $is_login = $login -> IsLogin();
+// var_dump($is_login);
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,14 +21,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-<header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">旬食ナビ</a>
-        </div>
-    </nav>
-    </header>
+    <?php include('./header.php') ?>
     <main>
+        <style>
+        .mc {
+            display: flex;
+        }
+        </style>
         <div class="mc">
             <div class="syokuzai">
                 <h3>ローカル食材</h3>
@@ -29,6 +40,7 @@
                     </div>
                     <div>
                         <label for="">食材画像</label>
+                        <p>.jpgじゃないと泣いちゃう</p>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>File</span>
@@ -119,6 +131,7 @@
                         </div>
                         <div>
                             <label for="">献立画像</label>
+                        <p>.jpgじゃないと泣いちゃう</p>
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span>File</span>

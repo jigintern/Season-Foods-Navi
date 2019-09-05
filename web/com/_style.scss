@@ -2,7 +2,7 @@
     width: 1000px;
     margin: 0 auto;
     min-height: 500px;
-    display: flex;
+    margin-top: 2em;
 
     >div {
         width: 50%;
@@ -11,4 +11,11 @@
             padding: .5em 1em;
         }
     }
+}
+
+.management {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
 }
