@@ -10,7 +10,7 @@ const REQUEST_PREFECTURE_URL = "http://geoapi.heartrails.com/api/json?method=sea
 
 async function GetPrefecture(longitude,latitude){
     const pref = await new Promise((resolve, reject) => {
-        const request_url = REQUEST_PREFECTURE_URL + '?x=' + longitude + '&y=' + latitude;
+        const request_url = REQUEST_PREFECTURE_URL + '&x=' + longitude + '&y=' + latitude;
         // console.log(REQUEST_PREFECTURE_URL);
         http.get(request_url, (res) => {
             let body = '';
