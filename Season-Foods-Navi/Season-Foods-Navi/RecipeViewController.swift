@@ -13,6 +13,7 @@ import SwiftyJSON
 import SDWebImage
 import CoreLocation
 import WebKit
+import Hydra
 var check:[Bool] = []
 var tapped_row = 0
 class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate{
@@ -25,6 +26,11 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
     var foodInfo:Recipe!
     var foodsInfo:[Recipe] = []
     var foodsServer:String!
+    var names:[String] = []
+    var counter = 0
+    let dummy = """
+{"food_info":{"id":1,"name":"あおとうがらし","base_food":null,"picture":null,"months":"7,8,9","pref_id":0,"post":0},"prices":{},"nutritional":null}
+"""
 //    @IBOutlet weak var howtomake: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,40 +65,80 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
         //webView.uiDelegate = self as! WKUIDelegate
     }
     func setRecipeTable(){
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
         if recipiInfo == nil{return}
         for i in 0..<recipiInfo.foods.count{
-            if self.recipiInfo.foods[i].id == 0{
-                 self.foodsServer = "http://localhost:3000/api/v1/food/1"
-            }else{
-            self.foodsServer = "http://localhost:3000/api/v1/food/\(recipiInfo.foods[i].id)"
-            }
-            Alamofire.request(foodsServer,method: .get).responseString{response in
-                switch response.result{
-                case .success:
-                    /* print("result",response)
-                     guard let json = response.data else{return}*/
-                    //if let data = json.data(using:.utf8){
-                    let decoder:JSONDecoder = JSONDecoder()
-                    do{
-                        self.foodInfo = try decoder.decode(Recipe.self,from:response.data!)
-                        self.foodsInfo.append(self.foodInfo)
-                       // print(self.foodsInfo)
-
-                    }catch{
-                        print(response)
-                        print("JSON convert failed",error.localizedDescription)
-                    }
-                    break
-                case .failure(let ERROR):
-                    print(ERROR)
-                    break
-                }
-                self.recipeNameLabel.text = self.recipename
-                print(response)
-                self.recipematerial.reloadData()
+          /*  dispatchGroup.enter()
+            dispatchQueue.async(group:dispatchGroup,
+                                [weak, self], in
+                self?.asyncProcess(number :i){
                 
+            }*/
+            if recipiInfo.foods[i].id == 0{
+                names.append(recipiInfo.foods[i].name)
+                print(names)
             }
         }
+        print("count",recipiInfo.foods.count)
+        for i in 0..<recipiInfo.foods.count{
+            if self.recipiInfo.foods[i].id == 0{
+                if let data = dummy.data(using:.utf8){
+                let decoder:JSONDecoder = JSONDecoder()
+                    do{
+                        self.foodInfo = try decoder.decode(Recipe.self,from:data)
+                        self.foodsInfo.append(self.foodInfo)
+                    }catch{
+                        print("JSONconvertfailed",error)
+                    }
+              //  let dummydata = dummy.data(using: .utf8
+                }
+               // self.foodsServer = "http://t3.intern.jigd.info/api/v1/food/1"
+                self.recipematerial.reloadData()
+                continue
+            }else{
+                print(recipiInfo.foods[i].id)
+                self.foodsServer = "http://t3.intern.jigd.info/api/v1/food/\(recipiInfo.foods[i].id)"
+                //self.foodsServer = "http://localhost:3000/api/v1/food/\(recipiInfo.foods[i].id)"
+               // Promise<Any>{resolve,reject,foodInfo   in
+              //  async(in: .main, token:nil){_ in
+                    Alamofire.request(self.foodsServer,method: .get).responseString{response in
+                        switch response.result{
+                        case .success:
+                            /* print("result",response)
+                             guard let json = response.data else{return}*/
+                            //if let data = json.data(using:.utf8){
+                            let decoder:JSONDecoder = JSONDecoder()
+                            do{
+                                self.foodInfo = try decoder.decode(Recipe.self,from:response.data!)
+                                self.foodsInfo.append(self.foodInfo)
+                                //DispatchQueue
+                                // print(self.foodsInfo)
+                                
+                            }catch{
+                                print(response)
+                                print("JSON convert failed",error.localizedDescription)
+                            }
+                            break
+                        case .failure(let ERROR):
+                            print(ERROR)
+                            break
+                        }
+                        self.recipeNameLabel.text = self.recipename
+                        print(self.foodsInfo)
+                        self.recipematerial.reloadData()
+                    }
+                //    }.then{ _ in
+                  //      print("OK")
+                //}
+                    
+                  /*  }.then{ result in
+                    print(result)
+                }.catch{ error in
+                    print(error)
+                }*/
+        }
+    }
         // print(self.foodsInfo)
     }
     func setRecipeView(){
@@ -136,11 +182,22 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
       //  print(recipeInfo.recipeMaterial.count)
         if indexPath.row == 0{
             check.removeAll()
+            counter = 0
         }
         if indexPath.row > 0 && indexPath.row <= foodsInfo.count{
-        cell.materialName.text = recipiInfo.foods[indexPath.row-1].name//recipeInfo.recipeMaterial[indexPath.row-1]//
+          /*  if foodsInfo[indexPath.row-1].foodInfo.id == 1 && counter < names.count{
+                print(counter)
+                print(names[counter])
+                cell.materialName.text = names[counter]
+                counter += 1
+                
+                //names.remove(at:0)
+            }else{
+                cell.materialName.text = recipiInfo.foods[indexPath.row-1].name//foodsInfo[indexPath.row-1].foodInfo.name
+            }*///recipeInfo.recipeMaterial[indexPath.row-1]//
        // var image = UIImage(named:"check.png")
      //   image?.scaleImage(scaleSize:image!.size.width/CGFloat(self.view.frame.width/12))
+            cell.materialName.text = recipiInfo.foods[indexPath.row-1].name
         check.append(false)
      //   print(recipeInfo.recipeMaterial[indexPath.row-1])
      //   print(check)
@@ -151,22 +208,28 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
         //cell.syun.image = UIImage(named:"syun")
         cell.syun.setImage(UIImage(named:"syun"), for: .normal)
         cell.syun.setTitleColor(.red, for: .normal)
-        let months = foodsInfo[indexPath.row-1].foodInfo.months.components(separatedBy:  ",")
-        cell.checkbox.isHidden = false
-            cell.syun.isHidden = false
+            cell.checkbox.isHidden = false
+            cell.syun.isHidden = true
             cell.checkbox.isEnabled = true
             cell.syun.isEnabled = true
-   /*     if !foodsInfo[indexPath.row-1].months{
-                cell.syun.isHidden = true
-                 cell.syun.isEnabled = false
+            if foodsInfo[indexPath.row-1].foodInfo.months != "" && foodsInfo[indexPath.row-1].foodInfo.id != 1{
+        let months = foodsInfo[indexPath.row-1].foodInfo.months.components(separatedBy:  ",")
+        let dat = Date()
+        let calend = Calendar.current
+        let mont = calend.component(.month, from: dat)
+            for i in 0..<months.count{
+                if months[i] == "\(mont)"{
+                cell.syun.isHidden = false
+                 cell.syun.isEnabled = true
+                    print("yes")
+                }
+                }
             }
-            */
      //   checked(cell.checkbox)
         //cell.materialName.isUserInteractionEnabled = false
-            
         }else if indexPath.row == 0{
             //cell.materialName.text = "Loading..."
-            cell.materialName?.text = "材料一覧(タップして詳細を確認)"
+            cell.materialName?.text = "制作時間:\(recipiInfo.time)\n材料一覧(タップして詳細を確認)"
             cell.syun.isHidden = true
             cell.checkbox.isHidden = true
             cell.syun.isEnabled = false
@@ -180,12 +243,9 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
             cell.syun.isEnabled = false
             cell.checkbox.isEnabled = false
             cell.selectionStyle = .none
-        }else{
-            
-            cell.materialName?.text = "ここをタップするとも詳細なレシピのベージにジャンプします"
+        }else if indexPath.row == recipiInfo.foods.count+2{
+            cell.materialName?.text = "ここをタップすると詳細なレシピのベージにジャンプします"
           //   cell.materialName?.text = recipeInfo.howto
-             
- 
             cell.syun.isHidden = true
             cell.checkbox.isHidden = true
             cell.syun.isEnabled = false
@@ -202,6 +262,7 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
             let urlRequest = URLRequest(url:URL(string:targetUrl)!)
             webView.load(urlRequest)
             self.view.addSubview(webView)
+         //   performSegue(withIdentifier: "toWebView", sender: nil)
         }
         if indexPath.row > foodsInfo.count||indexPath.row == 0{
             return
@@ -211,7 +272,7 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
             return
         }
         tapped_row = indexPath.row-1
-         print("\(indexPath.row)番目の行が選択されました。\(recipiInfo.foods[tapped_row].name)")
+         print("\(indexPath.row)番目の行が選択されました。\(recipiInfo.foods[tapped_row].name)\(foodsInfo[tapped_row].foodInfo.id)")
         performSegue(withIdentifier: "toFoodInfo", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -219,17 +280,17 @@ class RecipeViewController:UIViewController,UITableViewDelegate,UITableViewDataS
             //  let nc = segue.destination as! UINavigationController
             var next = 1
             let nextView = segue.destination as! FoodInfoViewController
-            let id = recipiInfo.foods[tapped_row].name
+            let id = foodsInfo[tapped_row].foodInfo.id
             for i in 0..<foodsInfo.count{
-                print(recipiInfo.foods[i].name,id)
-                if recipiInfo.foods[i].name == id{
+                print(foodsInfo[i].foodInfo.id,id)
+                if foodsInfo[i].foodInfo.id == id{
                     next = i
                     print(next)
                     break
                 }
             }
             nextView.food_info = foodsInfo[next]
-            nextView.foodName = foodsInfo[next].foodInfo.name
+            nextView.foodName = recipiInfo.foods[tapped_row].name
             //print(rakutenResults[0].result[tapped_path])
          //   nextView.foodName = recipeInfo.recipeMaterial[tapped_row]
    //         nextView.foodid = 

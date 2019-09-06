@@ -3,6 +3,7 @@ PODS:
   - Charts (3.3.0):
     - Charts/Core (= 3.3.0)
   - Charts/Core (3.3.0)
+  - HydraAsync (2.0.2)
   - SDWebImage (5.1.0):
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
@@ -11,6 +12,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Charts
+  - HydraAsync
   - SDWebImage
   - SwiftyJSON
 
@@ -18,15 +20,17 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Charts
+    - HydraAsync
     - SDWebImage
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
+  HydraAsync: 690b8c1c9dcde7ee1093cee363a6c1ce36b56a83
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 8941becc69a55c6dff01ffc4fd4cf57875daa8e6
+PODFILE CHECKSUM: dc98dee2b67582f5e2feaafa3c3853f15c45aaba
 
 COCOAPODS: 1.7.5

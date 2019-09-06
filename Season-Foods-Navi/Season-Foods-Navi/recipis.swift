@@ -84,7 +84,7 @@ struct rakuten:Codable{
 }
 
 struct food_info:Codable{
-    var food_info:[foodinfo]
+    var food_info:[foodinfo]!
     var prices:[price]!
     var nutritional:[nutritional]!
 }
@@ -98,13 +98,13 @@ struct inform:Codable{
     var unit:String
 }
 struct foodinfo:Codable{
-    var id:Int
-    var name:String
-    var base_food:String!
+    var id:Int!
+    var name:String!
+    var base_food:Int!
     var picture:String!
     var months:String
-    var pref_id:Int
-    var post:Int
+    var pref_id:Int!
+    var post:Int!
 }
 struct price:Codable{
     var key:[key]
@@ -116,7 +116,7 @@ struct key:Codable{
 }
 // MARK: - Recipe
 struct Recipe: Codable {
-    var foodInfo: FoodInfo
+    var foodInfo: FoodInfo!
     var prices: [String: Price]!
     var nutritional: Nutritional!
     
